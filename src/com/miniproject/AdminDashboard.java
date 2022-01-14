@@ -2,17 +2,20 @@ package com.miniproject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Dashboard extends JFrame {
+public class AdminDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
     JMenuItem home, student, faculty, addStudents, addFaculty, logOut;
     JMenu user;
 
-    public Dashboard(){
+    public AdminDashboard(){
         menuBar = new JMenuBar();
         add(menuBar);
 
         home = new JMenuItem("Home");
+        home.addActionListener(this);
         menuBar.add(home);
 
         student = new JMenuItem("Student");
@@ -25,12 +28,15 @@ public class Dashboard extends JFrame {
         menuBar.add(user);
 
         addStudents = new JMenuItem("Add Student");
+        addStudents.addActionListener(this);
         user.add(addStudents);
 
         addFaculty = new JMenuItem("Add Faculty");
+        addFaculty.addActionListener(this);
         user.add(addFaculty);
 
         logOut = new JMenuItem("Log Out");
+        logOut.addActionListener(this);
         user.add(logOut);
 
         menuBar.setBounds(0,0,220, 30);
@@ -55,7 +61,19 @@ public class Dashboard extends JFrame {
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Add Faculty")){
+            new AddFaculty().setVisible(true);
+        } else if(e.getActionCommand().equals("Add Student")){
+            new AddStudents().setVisible(true);
+        } else if(e.getActionCommand().equals("Log Out")){
+            new Login().setVisible(true);
+            this.setVisible(false);
+        }
+    }
+
     public static void main(String[] args) {
-        new Dashboard().setVisible(true);
+        new AdminDashboard().setVisible(true);
     }
 }

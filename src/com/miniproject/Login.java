@@ -70,7 +70,7 @@ public class Login extends JFrame implements ActionListener {
                 ResultSet resultSet = conn.statement.executeQuery(query);
 
                 if(resultSet.next()){
-                    new Dashboard().setVisible(true);
+                    new AdminDashboard().setVisible(true);
                     this.setVisible(false);
 //                    JOptionPane.showMessageDialog(null, "Username and Password found!");
                 } else {
