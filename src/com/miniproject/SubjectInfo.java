@@ -9,25 +9,24 @@ import java.sql.SQLException;
 
 public class SubjectInfo extends JFrame {
     JTable subjectTable;
-    JButton applyFilter, back;
 
     SubjectInfo() {
 
         subjectTable = new JTable();
-        subjectTable.setBounds(20, 20, 1000, 500);
+        subjectTable.setBounds(20, 35, 1000, 490);
         add(subjectTable);
 
-        applyFilter = new JButton("Apply Filter");
-        applyFilter.setBounds(100, 520, 150, 30);
-        applyFilter.setForeground(Color.WHITE);
-        applyFilter.setBackground(Color.BLACK);
-        add(applyFilter);
+        JLabel subCodeLabel = new JLabel("SUBJECT CODE");
+        subCodeLabel.setBounds(140, 6, 150, 30);
+        add(subCodeLabel);
 
-        back = new JButton("Back");
-        back.setBounds(800, 520, 150, 30);
-        back.setForeground(Color.WHITE);
-        back.setBackground(Color.BLACK);
-        add(back);
+        JLabel nameLabel = new JLabel("TITLE");
+        nameLabel.setBounds(500, 6, 60, 30);
+        add(nameLabel);
+
+        JLabel creditLabel = new JLabel("CREDITS");
+        creditLabel.setBounds(830, 6, 60, 30);
+        add(creditLabel);
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
@@ -41,7 +40,7 @@ public class SubjectInfo extends JFrame {
 
     String getQuery() {
         String query = "SELECT * FROM SUBJECT";
-        // TODO: Add Query Selection Logic Here
+        // if filter is added, add selection query generation logic here
         return query;
     }
 

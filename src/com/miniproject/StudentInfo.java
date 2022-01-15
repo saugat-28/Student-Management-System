@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class StudentInfo extends JFrame implements ActionListener {
     JTable studentTable;
-    JButton applyFilter, back;
+    JButton applyFilter, close;
     JComboBox department, sem, sec;
     JCheckBox useFilter;
     String departments[] = {
@@ -75,12 +75,12 @@ public class StudentInfo extends JFrame implements ActionListener {
         applyFilter.addActionListener(this);
         add(applyFilter);
 
-        back = new JButton("Back");
-        back.setBounds(800, 560, 150, 30);
-        back.setForeground(Color.WHITE);
-        back.setBackground(Color.BLACK);
-        back.addActionListener(this);
-        add(back);
+        close = new JButton("Close");
+        close.setBounds(800, 560, 150, 30);
+        close.setForeground(Color.WHITE);
+        close.setBackground(Color.BLACK);
+        close.addActionListener(this);
+        add(close);
 
         department.setEnabled(false);
         sem.setEnabled(false);
@@ -139,7 +139,7 @@ public class StudentInfo extends JFrame implements ActionListener {
         } else if(e.getSource() == applyFilter){
             String newQuery = getQuery();
             loadStudents(newQuery);
-        } else if(e.getSource() == back){
+        } else if(e.getSource() == close){
             this.setVisible(false);
         }
     }
