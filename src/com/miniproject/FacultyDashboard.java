@@ -5,12 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AdminDashboard extends JFrame implements ActionListener {
+public class FacultyDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, student, faculty, addStudents, addFaculty, addSubjects, logOut;
+    JMenuItem home, marks, attendance, courses ,logOut;
     JMenu user;
-
-    public AdminDashboard(){
+    FacultyDashboard(){
         menuBar = new JMenuBar();
         add(menuBar);
 
@@ -18,26 +17,14 @@ public class AdminDashboard extends JFrame implements ActionListener {
         home.addActionListener(this);
         menuBar.add(home);
 
-        student = new JMenuItem("Student");
-        menuBar.add(student);
+        marks = new JMenuItem("Marks");
+        menuBar.add(marks);
 
-        faculty = new JMenuItem("Faculty");
-        menuBar.add(faculty);
+        attendance = new JMenuItem("Attendance");
+        menuBar.add(attendance);
 
         user = new JMenu("User");
         menuBar.add(user);
-
-        addStudents = new JMenuItem("Add Student");
-        addStudents.addActionListener(this);
-        user.add(addStudents);
-
-        addFaculty = new JMenuItem("Add Faculty");
-        addFaculty.addActionListener(this);
-        user.add(addFaculty);
-
-        addSubjects = new JMenuItem("Add Subject");
-        addSubjects.addActionListener(this);
-        user.add(addSubjects);
 
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
@@ -71,8 +58,6 @@ public class AdminDashboard extends JFrame implements ActionListener {
             new AddFaculty().setVisible(true);
         } else if(e.getActionCommand().equals("Add Student")){
             new AddStudents().setVisible(true);
-        } else if (e.getActionCommand().equals("Add Subject")){
-            new AddSubject().setVisible(true);
         } else if(e.getActionCommand().equals("Log Out")){
             new Login().setVisible(true);
             this.setVisible(false);
@@ -80,6 +65,6 @@ public class AdminDashboard extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new AdminDashboard().setVisible(true);
+        new FacultyDashboard();
     }
 }
