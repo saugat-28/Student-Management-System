@@ -11,7 +11,7 @@ public class AddStudents extends JFrame implements ActionListener {
     JTextField usnTF, nameTF, enrollYearTF, usernameTF;
     JPasswordField passwordTF;
     JRadioButton maleRB, femaleRB;
-    JComboBox date, month, year, department;
+    JComboBox date, month, year, department, sem, sec;
     JButton addButton, cancelButton;
 
     AddStudents() {
@@ -139,6 +139,27 @@ public class AddStudents extends JFrame implements ActionListener {
         facultyImageLabel.setBounds(500, 35, 300, 300);
         add(facultyImageLabel);
 
+        String semesters[] = {"1", "2", "3", "4", "5", "6", "7", "8"};
+        String sections[] = {"A", "B", "C", "D", "E"};
+
+        JLabel semesterLabel = new JLabel("SEMESTER");
+        semesterLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        semesterLabel.setBounds(60, 350, 120, 30);
+        add(semesterLabel);
+
+        sem = new JComboBox(semesters);
+        sem.setBounds(200, 350, 50, 30);
+        add(sem);
+
+        JLabel sectionLabel = new JLabel("SECTION");
+        sectionLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        sectionLabel.setBounds(60, 390, 120, 30);
+        add(sectionLabel);
+
+        sec = new JComboBox(sections);
+        sec.setBounds(200, 390, 50, 30);
+        add(sec);
+
         JLabel frameLabel = new JLabel("ENTER STUDENT DETAILS");
         frameLabel.setBounds(520, 10, 250, 30);
         frameLabel.setForeground(Color.BLUE);
@@ -146,14 +167,14 @@ public class AddStudents extends JFrame implements ActionListener {
         add(frameLabel);
 
         addButton = new JButton("ADD STUDENT");
-        addButton.setBounds(60, 400, 130, 30);
+        addButton.setBounds(60, 440, 130, 30);
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.WHITE);
         addButton.addActionListener(this);
         add(addButton);
 
         cancelButton = new JButton("CANCEL");
-        cancelButton.setBounds(210, 400, 100, 30);
+        cancelButton.setBounds(210, 440, 100, 30);
         cancelButton.setBackground(Color.BLACK);
         cancelButton.setForeground(Color.WHITE);
         cancelButton.addActionListener(this);
@@ -169,13 +190,15 @@ public class AddStudents extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             String name = nameTF.getText();
-            String dob =year.getSelectedItem() + "-" + (month.getSelectedIndex()+1) + "-" + date.getSelectedItem();
+            String dob = year.getSelectedItem() + "-" + (month.getSelectedIndex() + 1) + "-" + date.getSelectedItem();
             String usn = usnTF.getText();
             String enrollYear = enrollYearTF.getText();
             String username = usernameTF.getText();
             String password = String.valueOf(passwordTF.getPassword());
             String dept = String.valueOf(department.getSelectedItem());
             String gender = null;
+            String semester = String.valueOf(sem.getSelectedItem());
+            String section = String.valueOf(sec.getSelectedItem());
             if (maleRB.isSelected()) {
                 gender = "Male";
             } else if (femaleRB.isSelected()) {
@@ -204,7 +227,8 @@ public class AddStudents extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
-            String studentQuery = "INSERT INTO STUDENT VALUES('" + userId + "', '" + usn + "','" + name + "','" + gender + "','" + dob + "', '" + enrollYear + "', '" + dept + "')";
+            String studentQuery = "INSERT INTO STUDENT VALUES('" + userId + "', '" + usn + "','" + name + "','" +
+                    gender + "','" + dob + "', '" + enrollYear + "', '" + dept + "', '" + semester + "', '" + section + "')";
             try {
                 conn.statement.executeUpdate(studentQuery);
                 JOptionPane.showMessageDialog(null, "New Student Added");

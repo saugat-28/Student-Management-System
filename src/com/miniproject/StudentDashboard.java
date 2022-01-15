@@ -47,8 +47,8 @@ public class StudentDashboard extends JFrame implements ActionListener {
 
         setLayout(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
-        // setUndecorated(true); /*Removes Window Navigation Buttons*/
-        // setBounds(0,0,1910, 1000); /*Used if Extended State is not used */
+        /* setUndecorated(true); Removes Window Navigation Buttons
+        setBounds(0,0,1910, 1000); Used if Extended State is not used */
         setVisible(true);
     }
 

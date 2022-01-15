@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class FacultyDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, marks, attendance, courses ,logOut;
+    JMenuItem home, scores, attendance, courses ,logOut;
     JMenu user;
     FacultyDashboard(){
         menuBar = new JMenuBar();
@@ -17,8 +17,8 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         home.addActionListener(this);
         menuBar.add(home);
 
-        marks = new JMenuItem("Marks");
-        menuBar.add(marks);
+        scores = new JMenuItem("Scores");
+        menuBar.add(scores);
 
         attendance = new JMenuItem("Attendance");
         menuBar.add(attendance);

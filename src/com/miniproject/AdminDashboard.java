@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 
 public class AdminDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, student, faculty, addStudents, addFaculty, addSubjects, logOut;
+    JMenuItem home, student, faculty, subject, addStudents, addFaculty, addSubject, logOut;
     JMenu user;
 
-    public AdminDashboard(){
+    public AdminDashboard() {
         menuBar = new JMenuBar();
         add(menuBar);
 
@@ -19,10 +19,16 @@ public class AdminDashboard extends JFrame implements ActionListener {
         menuBar.add(home);
 
         student = new JMenuItem("Student");
+        student.addActionListener(this);
         menuBar.add(student);
 
         faculty = new JMenuItem("Faculty");
+        faculty.addActionListener(this);
         menuBar.add(faculty);
+
+        subject = new JMenuItem("Subject");
+        subject.addActionListener(this);
+        menuBar.add(subject);
 
         user = new JMenu("User");
         menuBar.add(user);
@@ -35,21 +41,21 @@ public class AdminDashboard extends JFrame implements ActionListener {
         addFaculty.addActionListener(this);
         user.add(addFaculty);
 
-        addSubjects = new JMenuItem("Add Subject");
-        addSubjects.addActionListener(this);
-        user.add(addSubjects);
+        addSubject = new JMenuItem("Add Subject");
+        addSubject.addActionListener(this);
+        user.add(addSubject);
 
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
         user.add(logOut);
 
-        menuBar.setBounds(0,0,220, 30);
+        menuBar.setBounds(0, 0, 260, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
         ImageIcon finalImage = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel(finalImage);
-        imageLabel.setBounds(0,0, 1560, 800);
+        imageLabel.setBounds(0, 0, 1560, 800);
         add(imageLabel);
 
         JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
@@ -67,13 +73,19 @@ public class AdminDashboard extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Add Faculty")){
+        if (e.getActionCommand().equals("Add Faculty")) {
             new AddFaculty().setVisible(true);
-        } else if(e.getActionCommand().equals("Add Student")){
+        } else if (e.getActionCommand().equals("Add Student")) {
             new AddStudents().setVisible(true);
-        } else if (e.getActionCommand().equals("Add Subject")){
+        } else if (e.getActionCommand().equals("Add Subject")) {
             new AddSubject().setVisible(true);
-        } else if(e.getActionCommand().equals("Log Out")){
+        } else if (e.getActionCommand().equals("Student")) {
+            new StudentInfo().setVisible(true);
+        } else if (e.getActionCommand().equals("Faculty")) {
+            new FacultyInfo().setVisible(true);
+        } else if (e.getActionCommand().equals("Subject")) {
+            new SubjectInfo().setVisible(true);
+        } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);
         }
@@ -81,5 +93,6 @@ public class AdminDashboard extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         new AdminDashboard().setVisible(true);
+
     }
 }
