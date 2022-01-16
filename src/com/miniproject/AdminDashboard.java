@@ -7,8 +7,12 @@ import java.awt.event.ActionListener;
 
 public class AdminDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, student, faculty, subject, addStudents, addFaculty, addSubject, logOut;
-    JMenu user;
+    JMenu view, addNew, delete, user;
+    JMenuItem home, student, faculty, subject; // For MenuBar
+    JMenuItem addStudents, addFaculty, addSubject; // For AddNew Menu
+    JMenuItem deleteStudent, deleteFaculty, deleteSubject; // For Edit Menu
+    JMenuItem logOut; // For User Menu
+
 
     public AdminDashboard() {
         menuBar = new JMenuBar();
@@ -18,38 +22,60 @@ public class AdminDashboard extends JFrame implements ActionListener {
         home.addActionListener(this);
         menuBar.add(home);
 
+        view = new JMenu("View");
+        menuBar.add(view);
+
         student = new JMenuItem("Student");
         student.addActionListener(this);
-        menuBar.add(student);
+        view.add(student);
 
         faculty = new JMenuItem("Faculty");
         faculty.addActionListener(this);
-        menuBar.add(faculty);
+        view.add(faculty);
 
         subject = new JMenuItem("Subject");
         subject.addActionListener(this);
-        menuBar.add(subject);
+        view.add(subject);
 
-        user = new JMenu("User");
-        menuBar.add(user);
+        addNew = new JMenu("Add New");
+        menuBar.add(addNew);
 
         addStudents = new JMenuItem("Add Student");
         addStudents.addActionListener(this);
-        user.add(addStudents);
+        addNew.add(addStudents);
 
         addFaculty = new JMenuItem("Add Faculty");
         addFaculty.addActionListener(this);
-        user.add(addFaculty);
+        addNew.add(addFaculty);
 
         addSubject = new JMenuItem("Add Subject");
         addSubject.addActionListener(this);
-        user.add(addSubject);
+        addNew.add(addSubject);
+
+
+        delete = new JMenu("Edit");
+        menuBar.add(delete);
+
+        deleteStudent = new JMenuItem("Edit Student");
+        deleteStudent.addActionListener(this);
+        delete.add(deleteStudent);
+
+        deleteFaculty = new JMenuItem("Edit Faculty");
+        deleteFaculty.addActionListener(this);
+        delete.add(deleteFaculty);
+
+        deleteSubject = new JMenuItem("Edit Subject");
+        deleteSubject.addActionListener(this);
+        delete.add(deleteSubject);
+
+        user = new JMenu("User");
+        menuBar.add(user);
 
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
         user.add(logOut);
 
-        menuBar.setBounds(0, 0, 260, 30);
+        menuBar.setBounds(0, 0, 220, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
@@ -85,7 +111,10 @@ public class AdminDashboard extends JFrame implements ActionListener {
             new FacultyInfo().setVisible(true);
         } else if (e.getActionCommand().equals("Subject")) {
             new SubjectInfo().setVisible(true);
-        } else if (e.getActionCommand().equals("Log Out")) {
+        } else if(e.getActionCommand().equals("Edit Student")){
+            new EditStudent().setVisible(true);
+        }
+        else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);
         }

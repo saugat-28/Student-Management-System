@@ -70,9 +70,26 @@ public class Login extends JFrame implements ActionListener {
                 ResultSet resultSet = conn.statement.executeQuery(query);
 
                 if(resultSet.next()){
-                    new AdminDashboard().setVisible(true);
-                    this.setVisible(false);
-//                    JOptionPane.showMessageDialog(null, "Username and Password found!");
+                    String userType;
+                    String userTypeQuery = "SELECT USERTYPE FROM USERS WHERE USERNAME = '" + username + "'";
+
+                    ResultSet userTypeSet = conn.statement.executeQuery(userTypeQuery);
+                    userTypeSet.next();
+                    userType = userTypeSet.getString(1);
+
+                    if(userType.equals("ADMIN")){
+                        new AdminDashboard();
+                        this.setVisible(false);
+                    } else if(userType.equals("STUDENT")){
+                        new StudentDashboard();
+                        this.setVisible(false);
+                    } else if(userType.equals("FACULTY")){
+                        new FacultyDashboard();
+                        this.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid User Type!");
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid username or password");
                 }
