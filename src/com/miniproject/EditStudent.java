@@ -163,19 +163,27 @@ public class EditStudent extends JFrame implements ActionListener {
             int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete details of " + nameVal.getText() + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
             System.out.println(confirmation);
             if (confirmation == 0) {
-                String query = "DELETE FROM STUDENT WHERE USN = '" + this.usnVal + "'";
-                Conn conn = new Conn();
-                try {
-                    conn.statement.executeUpdate(query);
-                    JOptionPane.showMessageDialog(this, "Deleted Successfully");
-                    this.setVisible(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "SQL Error Occurred");
-                }
+                deleteUser();
             }
         } else if (e.getSource() == cancelBtn) {
             this.setVisible(false);
+        }
+    }
+
+    private void deleteUser() {
+        try {
+            String userIDQuery = "SELECT USERID FROM STUDENT WHERE USN = '" + this.usnVal + "'";
+            Conn conn = new Conn();
+            String userId;
+            ResultSet userIDRS = conn.statement.executeQuery(userIDQuery);
+            userIDRS.next();
+            userId = userIDRS.getString(1);
+            String query = "DELETE FROM USERS WHERE USERID = " + userId + "";
+            conn.statement.executeUpdate(query);
+            JOptionPane.showMessageDialog(this, "Deleted Successfully");
+            this.setVisible(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
