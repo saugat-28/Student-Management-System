@@ -111,10 +111,13 @@ public class AdminDashboard extends JFrame implements ActionListener {
             new FacultyInfo().setVisible(true);
         } else if (e.getActionCommand().equals("Subject")) {
             new SubjectInfo().setVisible(true);
-        } else if(e.getActionCommand().equals("Edit Student")){
+        } else if (e.getActionCommand().equals("Edit Student")) {
             new EditStudent().setVisible(true);
-        }
-        else if (e.getActionCommand().equals("Log Out")) {
+        } else if (e.getActionCommand().equals("Edit Faculty")) {
+            new EditFaculty().setVisible(true);
+        } else if (e.getActionCommand().equals("Edit Subject")) {
+            new EditSubject().setVisible(true);
+        } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);
         }
