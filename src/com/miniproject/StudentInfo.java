@@ -14,6 +14,7 @@ public class StudentInfo extends JFrame implements ActionListener {
     JButton applyFilter, close;
     JComboBox department, sem, sec;
     JCheckBox useFilter;
+
     String departments[] = {
             "Computer Science and Engineering",
             "Information Science and Engineering",

@@ -11,7 +11,7 @@ public class Login extends JFrame implements ActionListener {
     JLabel label1, label2;
     JTextField textField;
     JPasswordField passwordField;
-    JButton button1, button2;
+    JButton loginBtn, cancelBtn;
 
     Login(){
         label1 = new JLabel("Username");
@@ -30,19 +30,19 @@ public class Login extends JFrame implements ActionListener {
         passwordField.setBounds(150, 70, 150, 30);
         add(passwordField);
 
-        button1= new JButton("Login");
-        button1.setBackground(Color.BLACK);
-        button1.setForeground(Color.WHITE);
-        button1.setBounds(40, 120, 120, 30);
-        button1.addActionListener(this);
-        add(button1);
+        loginBtn = new JButton("Login");
+        loginBtn.setBackground(Color.BLACK);
+        loginBtn.setForeground(Color.WHITE);
+        loginBtn.setBounds(40, 120, 120, 30);
+        loginBtn.addActionListener(this);
+        add(loginBtn);
 
-        button2 = new JButton("Cancel");
-        button2.setBackground(Color.BLACK);
-        button2.setForeground(Color.WHITE);
-        button2.setBounds(180, 120, 120, 30);
-        button2.addActionListener(this);
-        add(button2);
+        cancelBtn = new JButton("Cancel");
+        cancelBtn.setBackground(Color.BLACK);
+        cancelBtn.setForeground(Color.WHITE);
+        cancelBtn.setBounds(180, 120, 120, 30);
+        cancelBtn.addActionListener(this);
+        add(cancelBtn);
 
         ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/login.png"));
         Image image = icon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
@@ -60,7 +60,7 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == button1){
+        if(e.getSource() == loginBtn){
             String username = textField.getText();
             String password = String.valueOf(passwordField.getPassword());
             Conn conn = new Conn();
@@ -71,11 +71,13 @@ public class Login extends JFrame implements ActionListener {
 
                 if(resultSet.next()){
                     String userType;
-                    String userTypeQuery = "SELECT USERTYPE FROM USERS WHERE USERNAME = '" + username + "'";
+                    String userTypeQuery = "SELECT USERTYPE, USERID FROM USERS WHERE USERNAME = '" + username + "'";
 
                     ResultSet userTypeSet = conn.statement.executeQuery(userTypeQuery);
                     userTypeSet.next();
                     userType = userTypeSet.getString(1);
+                    UserDetails.userId = userTypeSet.getString(2);
+                    UserDetails.userName = username;
 
                     if(userType.equals("ADMIN")){
                         new AdminDashboard();
@@ -96,7 +98,7 @@ public class Login extends JFrame implements ActionListener {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        } else if(e.getSource() == button2){
+        } else if(e.getSource() == cancelBtn){
             System.exit(0);
         }
     }
