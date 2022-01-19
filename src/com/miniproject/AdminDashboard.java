@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 public class AdminDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenu view, addNew, delete, user;
+    JMenu view, addNew, delete, assign, user;
     JMenuItem home, student, faculty, subject; // For MenuBar
     JMenuItem addStudents, addFaculty, addSubject; // For AddNew Menu
     JMenuItem deleteStudent, deleteFaculty, deleteSubject; // For Edit Menu
+    JMenuItem assignSubject, enrollClass, unAssign, unEnroll;
     JMenuItem logOut; // For User Menu
 
 
@@ -68,6 +69,25 @@ public class AdminDashboard extends JFrame implements ActionListener {
         deleteSubject.addActionListener(this);
         delete.add(deleteSubject);
 
+        assign = new JMenu("Assign");
+        menuBar.add(assign);
+
+        assignSubject = new JMenuItem("Assign Subject");
+        assignSubject.addActionListener(this);
+        assign.add(assignSubject);
+
+        enrollClass = new JMenuItem("Enroll Class");
+        enrollClass.addActionListener(this);
+        assign.add(enrollClass);
+
+        unAssign = new JMenuItem("Un-Assign Subject");
+        unAssign.addActionListener(this);
+        assign.add(unAssign);
+
+        unEnroll = new JMenuItem("Un-Enroll Class");
+        unEnroll.addActionListener(this);
+        assign.add(unEnroll);
+
         user = new JMenu("User");
         menuBar.add(user);
 
@@ -75,7 +95,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         logOut.addActionListener(this);
         user.add(logOut);
 
-        menuBar.setBounds(0, 0, 220, 30);
+        menuBar.setBounds(0, 0, 280, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
@@ -117,6 +137,14 @@ public class AdminDashboard extends JFrame implements ActionListener {
             new EditFaculty().setVisible(true);
         } else if (e.getActionCommand().equals("Edit Subject")) {
             new EditSubject().setVisible(true);
+        } else if (e.getActionCommand().equals("Assign Subject")) {
+            new AssignSubject().setVisible(true);
+        } else if (e.getActionCommand().equals("Enroll Class")) {
+            new EnrollClass().setVisible(true);
+        } else if (e.getActionCommand().equals("Un-Assign Subject")) {
+            new UnAssignSubject().setVisible(true);
+        } else if (e.getActionCommand().equals("Un-Enroll Class")) {
+            new UnEnrollClass().setVisible(true);
         } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);

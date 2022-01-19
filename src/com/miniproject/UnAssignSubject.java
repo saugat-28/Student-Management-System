@@ -22,6 +22,7 @@ public class UnAssignSubject extends JFrame implements ActionListener {
     UnAssignSubject() {
         secAL = new ArrayList();
         secAL.add("All");
+
         headingLabel = new JLabel("UN-ASSIGN SUBJECT TO FACULTY");
         headingLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
         headingLabel.setForeground(Color.BLUE);
