@@ -54,6 +54,10 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         semVal.setBounds(450, 530, 50, 20);
         add(semVal);
 
+        sec = new JComboBox();
+        sec.setBounds(500, 530, 50, 20);
+        add(sec);
+
         applyFilter = new JButton("Apply Filter");
         applyFilter.setBounds(100, 560, 150, 30);
         applyFilter.setForeground(Color.WHITE);
@@ -101,7 +105,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
     }
 
     void loadSubject() {
-        String subQuery = "SELECT SUBCODE FROM ASSIGNED WHERE FACTID = '" + UserDetails.factId + "'";
+        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + UserDetails.factId + "'";
 //        String subQuery1 = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + "ISE/001" + "'";
         Conn conn = new Conn();
         try {
@@ -138,10 +142,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
             }
             System.out.println(sectionsAL);
             DefaultComboBoxModel model = new DefaultComboBoxModel(sectionsAL.toArray());
-            sec = new JComboBox();
             sec.setModel(model);
-            sec.setBounds(500, 530, 50, 20);
-            add(sec);
         } catch (SQLException e) {
             e.printStackTrace();
         }
