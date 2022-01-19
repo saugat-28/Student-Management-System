@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ScoresInfo extends JFrame implements ActionListener {
     JTable scoresTable;
-    JLabel sem, semVal, usnLabel, nameLabel, attendedLabel, totalLabel;
+    JLabel sem, semVal, usnLabel, nameLabel, ia1MarksLabel, ia2MarksLabel, seMarksLabel;
     JButton applyFilter, close;
     JComboBox subject, sec;
     ArrayList subjects, sections;
@@ -20,20 +20,25 @@ public class ScoresInfo extends JFrame implements ActionListener {
 
     ScoresInfo() {
         usnLabel = new JLabel("USN");
-        usnLabel.setBounds(130, 6, 30, 30);
+        usnLabel.setBounds(105, 6, 30, 30);
         add(usnLabel);
 
         nameLabel = new JLabel("NAME");
-        nameLabel.setBounds(380, 6, 40, 30);
+        nameLabel.setBounds(300, 6, 40, 30);
         add(nameLabel);
 
-        attendedLabel = new JLabel("ATTENDED");
-        attendedLabel.setBounds(615, 6, 100, 30);
-        add(attendedLabel);
+        ia1MarksLabel = new JLabel("IA1 MARKS");
+        ia1MarksLabel.setBounds(485, 6, 100, 30);
+        add(ia1MarksLabel);
 
-        totalLabel = new JLabel("TOTAL");
-        totalLabel.setBounds(880, 6, 50, 30);
-        add(totalLabel);
+        ia2MarksLabel = new JLabel("IA2 MARKS");
+        ia2MarksLabel.setBounds(685, 6, 100, 30);
+        add(ia2MarksLabel);
+
+
+        seMarksLabel = new JLabel("SEMARKS");
+        seMarksLabel.setBounds(885, 6, 100, 30);
+        add(seMarksLabel);
 
         subjects = new ArrayList();
         sections = new ArrayList();
