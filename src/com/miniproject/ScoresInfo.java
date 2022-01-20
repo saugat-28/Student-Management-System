@@ -44,6 +44,11 @@ public class ScoresInfo extends JFrame implements ActionListener {
         sections = new ArrayList();
         sections.add("All");
 
+        subject = new JComboBox();
+        subject.setBounds(100, 530, 280, 20);
+        subject.addActionListener(this);
+        add(subject);
+
         scoresTable = new JTable();
         scoresTable.setBounds(20, 35, 1000, 490);
         add(scoresTable);
@@ -62,14 +67,14 @@ public class ScoresInfo extends JFrame implements ActionListener {
         sec.setBounds(500, 530, 50, 20);
         add(sec);
 
-        applyFilter = new JButton("Apply Filter");
+        applyFilter = new JButton("APPLY FILTER");
         applyFilter.setBounds(100, 560, 150, 30);
         applyFilter.setForeground(Color.WHITE);
         applyFilter.setBackground(Color.BLACK);
         applyFilter.addActionListener(this);
         add(applyFilter);
 
-        close = new JButton("Close");
+        close = new JButton("CLOSE");
         close.setBounds(800, 560, 150, 30);
         close.setForeground(Color.WHITE);
         close.setBackground(Color.BLACK);
@@ -88,7 +93,6 @@ public class ScoresInfo extends JFrame implements ActionListener {
 
     String getQuery() {
         String subCode = String.valueOf(subject.getSelectedItem());
-//        String subCode = "18CS51";
         String query = "SELECT S.USN, S.NAME, M.IA1MARKS, M.IA2MARKS, M.SEMARKS FROM STUDENT S, MARKS M WHERE S.USN=M.USN AND M.SUBCODE='" + subCode + "'";
         String orderBy = "ORDER BY S.USN";
         String sect = String.valueOf(sec.getSelectedItem());
@@ -119,10 +123,8 @@ public class ScoresInfo extends JFrame implements ActionListener {
                 subjects.add(subcodeResult.getString(1));
             }
             System.out.println(subjects);
-            subject = new JComboBox(subjects.toArray());
-            subject.setBounds(100, 530, 280, 20);
-            subject.addActionListener(this);
-            add(subject);
+            DefaultComboBoxModel model = new DefaultComboBoxModel(subjects.toArray());
+            subject.setModel(model);
             subFetched = true;
         } catch (SQLException e) {
             e.printStackTrace();
