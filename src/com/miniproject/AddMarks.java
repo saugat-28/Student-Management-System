@@ -110,7 +110,6 @@ public class AddMarks extends JFrame implements ActionListener {
 
         seMarkTF = new JTextField();
         seMarkTF.setBounds(140, 250, 100, 30);
-        seMarkTF.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(seMarkTF);
 
         update = new JButton("UPDATE");
@@ -213,7 +212,63 @@ public class AddMarks extends JFrame implements ActionListener {
 
     void updateMarks() {
         if (usnFetched) {
+            usn = String.valueOf(usnCB.getSelectedItem());
+            ia1Marks = mark1TF.getText();
+            ia2Marks = mark2TF.getText();
+            seMarks = seMarkTF.getText();
+            Boolean updateNeeded = false;
 
+            String checkQuery = "SELECT * FROM MARKS WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
+            Boolean notFound=true;
+            Conn conn = new Conn();
+            try {
+                ResultSet checkRS = conn.statement.executeQuery(checkQuery);
+                if(checkRS.next()){
+                    notFound = false;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if(notFound){
+                String insertQuery = "INSERT INTO MARKS VALUES('" + usn + "', '" + subCode + "', null, null, null)";
+                try {
+                    conn.statement.executeUpdate(insertQuery);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            String updateQuery = "UPDATE MARKS SET ";
+            String queryCondition = "WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
+            if(!ia1Marks.equals("")){
+                updateQuery += "IA1MARKS = '" + ia1Marks + "' ";
+                updateNeeded = true;
+            }
+            if(!ia2Marks.equals("")){
+                if(updateNeeded){
+                    updateQuery += ", ";
+                }
+                updateQuery += "IA2MARKS = '" + ia2Marks + "' ";
+                updateNeeded = true;
+            }
+            if(!seMarks.equals("")){
+                if(updateNeeded){
+                    updateQuery += ", ";
+                }
+                updateQuery += "SEMARKS = '" + seMarks + "' ";
+                updateNeeded = true;
+            }
+            updateQuery +=queryCondition;
+            if(updateNeeded){
+                try {
+                    conn.statement.executeUpdate(updateQuery);
+                    JOptionPane.showMessageDialog(null, "Marks Updated Successfully!");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,"An Error Occurred");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null,"Nothing to update!");
+            }
         }
     }
 
