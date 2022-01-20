@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 public class FacultyDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, scores, attendance, logOut;
-    JMenu user, view;
+    JMenuItem home, viewScores, viewAttendance, addScores, addAttendance, logOut;
+    JMenu userMenu, viewMenu, addMenu;
 
     FacultyDashboard() {
 
@@ -21,25 +21,36 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         home.addActionListener(this);
         menuBar.add(home);
 
-        view = new JMenu("View");
-        menuBar.add(view);
+        viewMenu = new JMenu("View");
+        menuBar.add(viewMenu);
 
-        scores = new JMenuItem("Scores");
-        scores.addActionListener(this);
-        view.add(scores);
+        addMenu = new JMenu("Add");
+        menuBar.add(addMenu);
 
-        attendance = new JMenuItem("Attendance");
-        attendance.addActionListener(this);
-        view.add(attendance);
+        viewScores = new JMenuItem("View Scores");
+        viewScores.addActionListener(this);
+        viewMenu.add(viewScores);
 
-        user = new JMenu("User");
-        menuBar.add(user);
+        viewAttendance = new JMenuItem("View Attendance");
+        viewAttendance.addActionListener(this);
+        viewMenu.add(viewAttendance);
+
+        addScores = new JMenuItem("Add Scores");
+        addScores.addActionListener(this);
+        addMenu.add(addScores);
+
+        addAttendance = new JMenuItem("Add Attendance");
+        addAttendance.addActionListener(this);
+        addMenu.add(addAttendance);
+
+        userMenu = new JMenu("User");
+        menuBar.add(userMenu);
 
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
-        user.add(logOut);
+        userMenu.add(logOut);
 
-        menuBar.setBounds(0, 0, 120, 30);
+        menuBar.setBounds(0, 0, 160, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
@@ -83,9 +94,9 @@ public class FacultyDashboard extends JFrame implements ActionListener {
             new AddFaculty().setVisible(true);
         } else if (e.getActionCommand().equals("Add Student")) {
             new AddStudents().setVisible(true);
-        } else if (e.getActionCommand().equals("Scores")) {
+        } else if (e.getActionCommand().equals("View Scores")) {
             new ScoresInfo().setVisible(true);
-        } else if (e.getActionCommand().equals("Attendance")) {
+        } else if (e.getActionCommand().equals("View Attendance")) {
             new AttendanceInfo().setVisible(true);
         } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
