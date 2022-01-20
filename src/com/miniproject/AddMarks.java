@@ -205,9 +205,15 @@ public class AddMarks extends JFrame implements ActionListener {
     }
 
     void setName() {
-        if(usnFetched){
+        if (usnFetched) {
             int index = usnAL.indexOf(usnCB.getSelectedItem());
             nameValLabel.setText(String.valueOf(nameAL.get(index)));
+        }
+    }
+
+    void updateMarks() {
+        if (usnFetched) {
+
         }
     }
 
@@ -219,10 +225,10 @@ public class AddMarks extends JFrame implements ActionListener {
             loadSection();
         } else if (e.getSource() == close) {
             this.setVisible(false);
-        } else if(e.getSource() == usnCB){
+        } else if (e.getSource() == usnCB) {
             setName();
-        } else if(e.getSource() == update){
-
+        } else if (e.getSource() == update) {
+            updateMarks();
         }
     }
 

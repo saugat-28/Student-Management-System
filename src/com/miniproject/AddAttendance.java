@@ -13,14 +13,15 @@ public class AddAttendance extends JFrame implements ActionListener {
     JLabel usnLabel, nameLabel, nameValLabel, attendedLabel, totalLabel;
     JTextField attendedTF, totalTF;
     JComboBox secCB, subjectCB, usnCB;
-    String subCode, sem, sec;
+    String subCode, sem, sec, usn, attended, total;
     JButton update, close, fetchUSNBtn;
-    ArrayList usnAL, nameAL, sections,subjects;
+    ArrayList usnAL, nameAL, sections, subjects;
     Boolean subFetched = false, usnFetched = false;
-    AddAttendance(){
+
+    AddAttendance() {
         heading = new JLabel("ENTER ATTENDANCE FOR STUDENTS");
         heading.setBounds(110, 5, 300, 30);
-        heading.setFont(new Font("Tahoma", Font.PLAIN,17));
+        heading.setFont(new Font("Tahoma", Font.PLAIN, 17));
         heading.setForeground(Color.BLUE);
         add(heading);
 
@@ -30,7 +31,7 @@ public class AddAttendance extends JFrame implements ActionListener {
 
         subLabel = new JLabel("SUBJECT: ");
         subLabel.setBounds(40, 50, 80, 20);
-        subLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        subLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(subLabel);
 
         subjectCB = new JComboBox();
@@ -49,7 +50,7 @@ public class AddAttendance extends JFrame implements ActionListener {
         add(semVal);
 
         secLabel = new JLabel("SEC: ");
-        secLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        secLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         secLabel.setBounds(120, 90, 50, 20);
         add(secLabel);
 
@@ -66,7 +67,7 @@ public class AddAttendance extends JFrame implements ActionListener {
 
         usnLabel = new JLabel("USN: ");
         usnLabel.setBounds(40, 130, 50, 20);
-        usnLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        usnLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(usnLabel);
 
         usnCB = new JComboBox();
@@ -75,18 +76,18 @@ public class AddAttendance extends JFrame implements ActionListener {
         add(usnCB);
 
         nameLabel = new JLabel("NAME: ");
-        nameLabel.setBounds(230,130, 90, 20);
-        nameLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        nameLabel.setBounds(230, 130, 90, 20);
+        nameLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(nameLabel);
 
         nameValLabel = new JLabel();
-        nameValLabel.setBounds(290, 130,200,20);
-        nameValLabel.setFont(new Font("Tahoma", Font.PLAIN,14));
+        nameValLabel.setBounds(290, 130, 200, 20);
+        nameValLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         add(nameValLabel);
 
         attendedLabel = new JLabel("ATTENDED: ");
-        attendedLabel.setBounds(40,170, 100, 30);
-        attendedLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        attendedLabel.setBounds(40, 170, 100, 30);
+        attendedLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(attendedLabel);
 
         attendedTF = new JTextField();
@@ -94,8 +95,8 @@ public class AddAttendance extends JFrame implements ActionListener {
         add(attendedTF);
 
         totalLabel = new JLabel("TOTAL: ");
-        totalLabel.setBounds(40,210, 100, 30);
-        totalLabel.setFont(new Font("Tahoma", Font.BOLD,14));
+        totalLabel.setBounds(40, 210, 100, 30);
+        totalLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(totalLabel);
 
         totalTF = new JTextField();
@@ -194,9 +195,49 @@ public class AddAttendance extends JFrame implements ActionListener {
     }
 
     void setName() {
-        if(usnFetched){
+        if (usnFetched) {
             int index = usnAL.indexOf(usnCB.getSelectedItem());
             nameValLabel.setText(String.valueOf(nameAL.get(index)));
+        }
+    }
+
+    void updateAttendance() {
+        if (usnFetched) {
+            usn = String.valueOf(usnCB.getSelectedItem());
+            attended = attendedTF.getText();
+            total = totalTF.getText();
+
+            if (!attended.equals("") && !total.equals("")) {
+                String checkQuery = "SELECT * FROM ATTENDANCE WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
+                Boolean notFound=true;
+                Conn conn = new Conn();
+                try {
+                    ResultSet checkRS = conn.statement.executeQuery(checkQuery);
+                    if(checkRS.next()){
+                        notFound = false;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if(notFound){
+                    String insertQuery = "INSERT INTO ATTENDANCE VALUES('" + usn + "', '" + subCode + "', null, null)";
+                    try {
+                        conn.statement.executeUpdate(insertQuery);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                String update = "UPDATE ATTENDANCE SET TOTAL = '" + total + "', ATTENDED = '" + attended + "' WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
+                try {
+                    conn.statement.executeUpdate(update);
+                    JOptionPane.showMessageDialog(null, "Updated Successfully!");
+                    attendedTF.setText("");
+                    totalTF.setText("");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "AN Error Occurred");
+                }
+            }
         }
     }
 
@@ -208,10 +249,10 @@ public class AddAttendance extends JFrame implements ActionListener {
             loadSection();
         } else if (e.getSource() == close) {
             this.setVisible(false);
-        } else if(e.getSource() == usnCB){
+        } else if (e.getSource() == usnCB) {
             setName();
-        } else if(e.getSource() == update){
-
+        } else if (e.getSource() == update) {
+            updateAttendance();
         }
     }
 
