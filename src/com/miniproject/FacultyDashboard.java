@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class FacultyDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, viewScores, viewAttendance, addScores, addAttendance, logOut;
+    JMenuItem home, viewScores, viewAttendance, addScores, addAttendance, credits, logOut;
     JMenu userMenu, viewMenu, addMenu;
 
     FacultyDashboard() {
@@ -46,6 +46,10 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         userMenu = new JMenu("User");
         menuBar.add(userMenu);
 
+        credits = new JMenuItem("Credits");
+        credits.addActionListener(this);
+        userMenu.add(credits);
+
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
         userMenu.add(logOut);
@@ -74,12 +78,12 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    void fetchFactId(){
+    void fetchFactId() {
         String query = "SELECT FACTID FROM FACULTY WHERE USERID = '" + UserDetails.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 UserDetails.factId = resultSet.getString(1);
             }
             System.out.println(UserDetails.factId);
@@ -98,6 +102,8 @@ public class FacultyDashboard extends JFrame implements ActionListener {
             new ScoresInfo().setVisible(true);
         } else if (e.getActionCommand().equals("View Attendance")) {
             new AttendanceInfo().setVisible(true);
+        } else if (e.getActionCommand().equals("Credits")) {
+            new Credits();
         } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);

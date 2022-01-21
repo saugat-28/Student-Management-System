@@ -12,7 +12,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
     JMenuItem addStudents, addFaculty, addSubject; // For AddNew Menu
     JMenuItem deleteStudent, deleteFaculty, deleteSubject; // For Edit Menu
     JMenuItem assignSubject, enrollClass, unAssign, unEnroll;
-    JMenuItem logOut; // For User Menu
+    JMenuItem credits, logOut; // For User Menu
 
 
     public AdminDashboard() {
@@ -91,6 +91,10 @@ public class AdminDashboard extends JFrame implements ActionListener {
         user = new JMenu("User");
         menuBar.add(user);
 
+        credits = new JMenuItem("Credits");
+        credits.addActionListener(this);
+        user.add(credits);
+
         logOut = new JMenuItem("Log Out");
         logOut.addActionListener(this);
         user.add(logOut);
@@ -145,6 +149,8 @@ public class AdminDashboard extends JFrame implements ActionListener {
             new UnAssignSubject().setVisible(true);
         } else if (e.getActionCommand().equals("Un-Enroll Class")) {
             new UnEnrollClass().setVisible(true);
+        } else if(e.getActionCommand().equals("Credits")){
+            new Credits();
         } else if (e.getActionCommand().equals("Log Out")) {
             new Login().setVisible(true);
             this.setVisible(false);
