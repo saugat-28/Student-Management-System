@@ -24,8 +24,8 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         label1.add(label2);
 
         JButton button1 = new JButton("Next");
-        button1.setBackground(Color.WHITE);
-        button1.setForeground(Color.BLACK);
+        button1.setBackground(Color.BLACK);
+        button1.setForeground(Color.WHITE);
         button1.setBounds(900, 10, 100, 30);
         button1.addActionListener(this);
         label1.add(button1);
@@ -33,20 +33,20 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         setLayout(null);
         setVisible(true);
 
-        while (true){
-            label2.setVisible(false);
-            try {
-                Thread.sleep(500);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            label2.setVisible(true);
-            try{
-                Thread.sleep(500);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        }
+//        while (true){
+//            label2.setVisible(false);
+//            try {
+//                Thread.sleep(500);
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            label2.setVisible(true);
+//            try{
+//                Thread.sleep(500);
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -121,6 +121,8 @@ public class ResetAdminPassword extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "An Error Occurred");
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "User Not Found!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please Enter username!");
@@ -131,6 +133,7 @@ public class ResetAdminPassword extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == reset) {
             resetPassword();
+            this.setVisible(false);
         } else if (e.getSource() == cancel) {
             this.setVisible(false);
         }

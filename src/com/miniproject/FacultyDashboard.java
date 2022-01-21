@@ -79,12 +79,13 @@ public class FacultyDashboard extends JFrame implements ActionListener {
     }
 
     void fetchFactId() {
-        String query = "SELECT FACTID FROM FACULTY WHERE USERID = '" + UserDetails.userId + "'";
+        String query = "SELECT FACTID, DEPARTMENT FROM FACULTY WHERE USERID = '" + UserDetails.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
             if (resultSet.next()) {
                 UserDetails.factId = resultSet.getString(1);
+                UserDetails.dept = resultSet.getString(2);
             }
             System.out.println(UserDetails.factId);
         } catch (SQLException e) {
@@ -102,6 +103,10 @@ public class FacultyDashboard extends JFrame implements ActionListener {
             new ScoresInfo().setVisible(true);
         } else if (e.getActionCommand().equals("View Attendance")) {
             new AttendanceInfo().setVisible(true);
+        } else if (e.getActionCommand().equals("Add Scores")) {
+            new AddMarks().setVisible(true);
+        } else if (e.getActionCommand().equals("Add Attendance")) {
+            new AddAttendance().setVisible(true);
         } else if (e.getActionCommand().equals("Credits")) {
             new Credits();
         } else if (e.getActionCommand().equals("Log Out")) {

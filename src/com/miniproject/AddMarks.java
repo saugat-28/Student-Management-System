@@ -180,7 +180,7 @@ public class AddMarks extends JFrame implements ActionListener {
         if (subFetched) {
             this.sem = semVal.getText();
             this.sec = String.valueOf(secCB.getSelectedItem());
-            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "'";
+            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "' AND DEPARTMENT = '" + UserDetails.dept + "'";
             Conn conn = new Conn();
             String usn, name;
             usnAL = new ArrayList<>();

@@ -20,6 +20,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         add(menuBar);
 
         home = new JMenuItem("Home");
+        home.setFont(new Font("Tahoma", Font.PLAIN, 15));
         home.addActionListener(this);
         menuBar.add(home);
 
@@ -112,11 +113,18 @@ public class AdminDashboard extends JFrame implements ActionListener {
         imageLabel.setBounds(0, 0, 1560, 800);
         add(imageLabel);
 
-        JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
-        welcomeLabel.setBounds(400, 50, 800, 50);
-        welcomeLabel.setForeground(Color.BLACK);
-        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
-        imageLabel.add(welcomeLabel);
+//        JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
+//        welcomeLabel.setBounds(400, 50, 800, 50);
+//        welcomeLabel.setForeground(Color.BLACK);
+//        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
+//        imageLabel.add(welcomeLabel);
+
+        ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jss_transparent.png"));
+        Image scaledLogo = jssLogo.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        ImageIcon scaledJssLogo = new ImageIcon(scaledLogo);
+        JLabel jssLabel = new JLabel(scaledJssLogo);
+        jssLabel.setBounds(700, 50, 150, 150);
+        imageLabel.add(jssLabel);
 
         setLayout(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
