@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login extends JFrame implements ActionListener {
-    JLabel label1, label2;
+    JLabel label1, label2, forgotPassword;
     JTextField textField;
     JPasswordField passwordField;
     JButton loginBtn, cancelBtn;
@@ -44,6 +46,19 @@ public class Login extends JFrame implements ActionListener {
         cancelBtn.addActionListener(this);
         add(cancelBtn);
 
+        forgotPassword = new JLabel("FORGOT PASSWORD?");
+        forgotPassword.setForeground(Color.BLUE.darker());
+        forgotPassword.setBounds(170, 160, 150, 20);
+        forgotPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        forgotPassword.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                resetPrompt();
+            }
+        });
+        add(forgotPassword);
+
         ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/login.png"));
         Image image = icon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(image);
@@ -56,6 +71,16 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
         setBounds(500, 300, 600, 250);
         setVisible(true);
+    }
+
+    void resetPrompt(){
+        int confirmation = JOptionPane.showConfirmDialog(this, "ONLY ADMIN CAN RESET THEIR PASSWORD\n         Are you an administrator?", "Confrmationi", JOptionPane.YES_NO_OPTION);
+        System.out.println(confirmation);
+        if (confirmation == 0) {
+            new ResetAdminPassword();
+        } else {
+            JOptionPane.showMessageDialog(null, "To reset you password contact your administrator");
+        }
     }
 
     @Override
