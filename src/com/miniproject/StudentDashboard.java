@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class StudentDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
-    JMenuItem home, scores, attendance, courses ,logOut;
+    JMenuItem home, scores, attendance ,logOut;
     JMenu user;
     StudentDashboard(){
         menuBar = new JMenuBar();
@@ -18,9 +20,11 @@ public class StudentDashboard extends JFrame implements ActionListener {
         menuBar.add(home);
 
         scores = new JMenuItem("Scores");
+        scores.addActionListener(this);
         menuBar.add(scores);
 
         attendance = new JMenuItem("Attendance");
+        attendance.addActionListener(this);
         menuBar.add(attendance);
 
         user = new JMenu("User");
@@ -45,6 +49,8 @@ public class StudentDashboard extends JFrame implements ActionListener {
         welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
         imageLabel.add(welcomeLabel);
 
+        fetchUsn();
+
         setLayout(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
         /* setUndecorated(true); Removes Window Navigation Buttons
@@ -52,12 +58,27 @@ public class StudentDashboard extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    void fetchUsn(){
+        String query = "SELECT USN FROM STUDENT WHERE USERID = '" + UserDetails.userId + "'";
+        Conn conn = new Conn();
+        try {
+            ResultSet resultSet = conn.statement.executeQuery(query);
+            if(resultSet.next()){
+                UserDetails.usn = resultSet.getString(1);
+            }
+            System.out.println(UserDetails.usn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Add Faculty")){
-            new AddFaculty().setVisible(true);
-        } else if(e.getActionCommand().equals("Add Student")){
-            new AddStudents().setVisible(true);
+        if(e.getActionCommand().equals("Scores")){
+            new StudentScoreInfo().setVisible(true);
+        } else if(e.getActionCommand().equals("Attendance")){
+            new StudentAttendanceInfo().setVisible(true);
         } else if(e.getActionCommand().equals("Log Out")){
             new Login().setVisible(true);
             this.setVisible(false);
