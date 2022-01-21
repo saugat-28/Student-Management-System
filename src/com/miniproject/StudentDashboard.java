@@ -48,11 +48,18 @@ public class StudentDashboard extends JFrame implements ActionListener {
         imageLabel.setBounds(0, 0, 1560, 800);
         add(imageLabel);
 
-        JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
-        welcomeLabel.setBounds(400, 50, 800, 50);
-        welcomeLabel.setForeground(Color.BLACK);
-        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
-        imageLabel.add(welcomeLabel);
+//        JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
+//        welcomeLabel.setBounds(400, 50, 800, 50);
+//        welcomeLabel.setForeground(Color.BLACK);
+//        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
+//        imageLabel.add(welcomeLabel);
+
+        ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssate.png"));
+        Image scaledLogo = jssLogo.getImage().getScaledInstance(338, 128, Image.SCALE_DEFAULT);
+        ImageIcon scaledJssLogo = new ImageIcon(scaledLogo);
+        JLabel jssLabel = new JLabel(scaledJssLogo);
+        jssLabel.setBounds(650, 50, 338, 128);
+        imageLabel.add(jssLabel);
 
         fetchUsn();
 

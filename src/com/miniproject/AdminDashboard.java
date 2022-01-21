@@ -119,11 +119,11 @@ public class AdminDashboard extends JFrame implements ActionListener {
 //        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
 //        imageLabel.add(welcomeLabel);
 
-        ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jss_transparent.png"));
-        Image scaledLogo = jssLogo.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssate.png"));
+        Image scaledLogo = jssLogo.getImage().getScaledInstance(338, 128, Image.SCALE_DEFAULT);
         ImageIcon scaledJssLogo = new ImageIcon(scaledLogo);
         JLabel jssLabel = new JLabel(scaledJssLogo);
-        jssLabel.setBounds(700, 50, 150, 150);
+        jssLabel.setBounds(650, 50, 338, 128);
         imageLabel.add(jssLabel);
 
         setLayout(null);
