@@ -20,7 +20,6 @@ public class AdminDashboard extends JFrame implements ActionListener {
         add(menuBar);
 
         home = new JMenuItem("Home");
-        home.setFont(new Font("Tahoma", Font.PLAIN, 15));
         home.addActionListener(this);
         menuBar.add(home);
 

@@ -46,6 +46,7 @@ public class StudentScoreInfo extends JFrame {
 
     void loadScores(){
         String query = "SELECT S.SUBCODE, S.NAME, M.IA1MARKS, M.IA2MARKS, M.SEMARKS FROM SUBJECT S, MARKS M WHERE S.SUBCODE = M.SUBCODE AND M.USN = '" + UserDetails.usn + "'";
+        UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet scores = conn.statement.executeQuery(query);

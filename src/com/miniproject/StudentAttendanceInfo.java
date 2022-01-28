@@ -43,6 +43,7 @@ public class StudentAttendanceInfo extends JFrame {
 
     void fetchAttendance(){
         String query = "SELECT S.SUBCODE, S.NAME, A.ATTENDED, A.TOTAL FROM SUBJECT S, ATTENDANCE A WHERE S.SUBCODE = A.SUBCODE AND A.USN = '" + UserDetails.usn + "'";
+        UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet scores = conn.statement.executeQuery(query);

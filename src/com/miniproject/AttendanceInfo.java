@@ -95,6 +95,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
     }
 
     void loadStudents(String query) {
+        UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);

@@ -104,6 +104,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
     }
 
     void loadStudents(String query) {
+        UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
@@ -118,7 +119,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
         String subQuery1 = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + "ISE/001" + "'";
         Conn conn = new Conn();
         try {
-            ResultSet subcodeResult = conn.statement.executeQuery(subQuery1);
+            ResultSet subcodeResult = conn.statement.executeQuery(subQuery);
             while (subcodeResult.next()) {
                 subjects.add(subcodeResult.getString(1));
             }
@@ -142,7 +143,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
         ArrayList sectionsAL = new ArrayList();
         Conn conn = new Conn();
         try {
-            ResultSet subcodeResult = conn.statement.executeQuery(secQuery2);
+            ResultSet subcodeResult = conn.statement.executeQuery(secQuery);
             while (subcodeResult.next()) {
                 sectionsAL.add(subcodeResult.getString(1));
                 semVal.setText(subcodeResult.getString(2));

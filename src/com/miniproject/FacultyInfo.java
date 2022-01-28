@@ -77,6 +77,7 @@ public class FacultyInfo extends JFrame implements ActionListener {
     }
 
     void loadFaculty(String query) {
+        UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
