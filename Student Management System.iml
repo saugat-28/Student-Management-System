@@ -10,7 +10,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/rs2xml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/rs2xml.jar!/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/opencsv-5.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,12 +30,10 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/rs2xml.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Downloads/rs2xml.jar!/src" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

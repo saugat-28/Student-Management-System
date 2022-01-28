@@ -96,9 +96,15 @@ public class EditFaculty extends JFrame implements ActionListener {
     }
 
     void deleteFaculty(){
-        String query = "DELETE FROM FACULTY WHERE FACTID = '" + this.factId + "'";
+
+        String userIdQuery = "SELECT USERID FROM FACULTY WHERE FACTID = '" + this.factId + "'";
         Conn conn = new Conn();
         try {
+            String userId;
+            ResultSet rs = conn.statement.executeQuery(userIdQuery);
+            rs.next();
+            userId = rs.getString(1);
+            String query = "DELETE FROM USERS WHERE USERID = " + userId + "";
             conn.statement.executeUpdate(query);
             JOptionPane.showMessageDialog(null, "Faculty Deleted Successfully");
             this.setVisible(false);
