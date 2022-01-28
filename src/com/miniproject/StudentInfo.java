@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class StudentInfo extends JFrame implements ActionListener {
     JTable studentTable;
-    JButton applyFilter, close;
+    JButton applyFilter, close, saveBtn;
     JComboBox department, sem, sec;
     JCheckBox useFilter;
 
@@ -74,6 +74,21 @@ public class StudentInfo extends JFrame implements ActionListener {
         applyFilter.setBackground(Color.BLACK);
         applyFilter.addActionListener(this);
         add(applyFilter);
+
+        JLabel saveCSV = new JLabel("SAVE CSV:");
+        saveCSV.setFont(new Font("Tahoma", Font.BOLD, 14));
+        saveCSV.setBounds(430, 560, 80, 30);
+        add(saveCSV);
+
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon_white.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(510, 560, 30, 30);
+        saveBtn.setBackground(Color.BLACK);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
 
         close = new JButton("Close");
         close.setBounds(800, 560, 150, 30);
@@ -142,6 +157,8 @@ public class StudentInfo extends JFrame implements ActionListener {
             loadStudents(newQuery);
         } else if(e.getSource() == close){
             this.setVisible(false);
+        }  else if(e.getSource()==saveBtn){
+            new SaveCSV();
         }
     }
 

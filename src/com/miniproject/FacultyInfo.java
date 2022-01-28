@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class FacultyInfo extends JFrame implements ActionListener {
 
     JTable facultyTable;
-    JButton applyFilter, back;
+    JButton applyFilter, back, saveBtn;
     JComboBox department;
     String departments[] = {
             "All",
@@ -45,22 +45,37 @@ public class FacultyInfo extends JFrame implements ActionListener {
         add(department);
 
         applyFilter = new JButton("Apply Filter");
-        applyFilter.setBounds(360, 520, 150, 30);
+        applyFilter.setBounds(340, 520, 120, 30);
         applyFilter.setForeground(Color.WHITE);
         applyFilter.setBackground(Color.BLACK);
         applyFilter.addActionListener(this);
         add(applyFilter);
 
         back = new JButton("Back");
-        back.setBounds(550, 520, 150, 30);
+        back.setBounds(480, 520, 120, 30);
         back.setForeground(Color.WHITE);
         back.setBackground(Color.BLACK);
         back.addActionListener(this);
         add(back);
 
+        JLabel saveCSV = new JLabel("SAVE CSV:");
+        saveCSV.setFont(new Font("Tahoma", Font.BOLD, 14));
+        saveCSV.setBounds(610, 520, 80, 30);
+        add(saveCSV);
+
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon_white.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(690, 520, 30, 30);
+        saveBtn.setBackground(Color.BLACK);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
+
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setBounds(450, 200, 750, 600);
+        setBounds(400, 150, 750, 600);
         setVisible(true);
 
         String query = getQuery();
@@ -94,6 +109,8 @@ public class FacultyInfo extends JFrame implements ActionListener {
             loadFaculty(filterQuery);
         } else if(e.getSource() == back){
             this.setVisible(false);
+        } else if(e.getSource()==saveBtn){
+            new SaveCSV();
         }
     }
 

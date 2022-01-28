@@ -32,7 +32,7 @@ public class SaveCSV extends JFrame implements ActionListener {
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setBounds(400, 200, 300, 180);
+        setBounds(600, 200, 300, 180);
         setVisible(true);
     }
 
@@ -51,25 +51,27 @@ public class SaveCSV extends JFrame implements ActionListener {
         String path = "D:\\";
         String file = fileName + ".csv";
         String pathToFile = path + file;
+        Boolean includeHeaders = true;
         Conn conn = new Conn();
         String query = UserDetails.recentQuery;
-        Boolean includeHeaders = true;
-        try {
-            FileWriter filewriter = new FileWriter(pathToFile);
-            CSVWriter writer = new CSVWriter(filewriter);
-            ResultSet rs = conn.statement.executeQuery(query);
-            writer.writeAll(rs, includeHeaders);
-            filewriter.close();
-            JOptionPane.showMessageDialog(null, "CSV Saved Successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(!query.equals("")){
+            try {
+                FileWriter filewriter = new FileWriter(pathToFile);
+                CSVWriter writer = new CSVWriter(filewriter);
+                ResultSet rs = conn.statement.executeQuery(query);
+                writer.writeAll(rs, includeHeaders);
+                filewriter.close();
+                JOptionPane.showMessageDialog(null, "CSV Saved Successfully!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void main(String[] args) {
-//        UserDetails.recentQuery = "SELECT * FROM STUDENT";
-//        new SaveCSV();
+        UserDetails.recentQuery = "SELECT * FROM STUDENT";
+        new SaveCSV();
     }
 }

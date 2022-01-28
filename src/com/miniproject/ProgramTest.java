@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,7 +17,6 @@ public class ProgramTest {
     public static void main(String[] args) {
         UserDetails.recentQuery = "SELECT * FROM STUDENT";
         new TestingFrame();
-//        executeQuery();
     }
 
     private static void executeQuery() {
@@ -35,35 +33,20 @@ public class ProgramTest {
             e.printStackTrace();
         }
     }
-
-    public void downloadCSV(){
-        Conn conn = new Conn();
-        String query = "SELECT * FROM STUDENT";
-        Boolean includeHeaders = true;
-        try {
-            FileWriter filewriter = new FileWriter("database.csv");
-            CSVWriter writer = new CSVWriter(filewriter);
-            ResultSet rs = conn.statement.executeQuery(query);
-//            rs.next();
-            writer.writeAll(rs, includeHeaders);
-            String val = rs.getString(3);
-            System.out.println("Value: " + val);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 class TestingFrame extends JFrame implements ActionListener {
-    JButton downloadBtn;
+    JButton saveBtn;
 
     TestingFrame(){
-        downloadBtn = new JButton("Download CSV");
-        downloadBtn.setBounds(40, 40, 150, 30);
-        downloadBtn.addActionListener(this);
-        add(downloadBtn);
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(35, 35, 30, 30);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
@@ -73,7 +56,7 @@ class TestingFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == downloadBtn){
+        if(e.getSource() == saveBtn){
             System.out.println("Button Clicked");
             downloadCSV();
         }
