@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ScoresInfo extends JFrame implements ActionListener {
     JTable scoresTable;
     JLabel sem, semVal, usnLabel, nameLabel, ia1MarksLabel, ia2MarksLabel, seMarksLabel;
-    JButton applyFilter, close;
+    JButton applyFilter, close, saveBtn;
     JComboBox subject, sec;
     ArrayList subjects, sections;
     Boolean subFetched = false;
@@ -73,6 +73,21 @@ public class ScoresInfo extends JFrame implements ActionListener {
         applyFilter.setBackground(Color.BLACK);
         applyFilter.addActionListener(this);
         add(applyFilter);
+
+        JLabel saveCSV = new JLabel("SAVE CSV:");
+        saveCSV.setFont(new Font("Tahoma", Font.BOLD, 14));
+        saveCSV.setBounds(430, 560, 80, 30);
+        add(saveCSV);
+
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon_white.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(510, 560, 30, 30);
+        saveBtn.setBackground(Color.BLACK);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
 
         close = new JButton("CLOSE");
         close.setBounds(800, 560, 150, 30);
@@ -166,6 +181,8 @@ public class ScoresInfo extends JFrame implements ActionListener {
             loadSection();
         } else if (e.getSource() == close) {
             this.setVisible(false);
+        } else if(e.getSource()==saveBtn){
+            new SaveCSV();
         }
     }
 

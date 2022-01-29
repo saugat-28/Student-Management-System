@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class AttendanceInfo extends JFrame implements ActionListener {
     JTable attendanceTable;
     JLabel sem, semVal, usnLabel, nameLabel, attendedLabel, totalLabel;
-    JButton applyFilter, close;
+    JButton applyFilter, close, saveBtn;
     JComboBox subject, sec;
     ArrayList subjects, sections;
     Boolean subFetched = false;
@@ -21,7 +21,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
 
     AttendanceInfo() {
         usnLabel = new JLabel("USN");
-        usnLabel.setBounds(130, 6, 30,30);
+        usnLabel.setBounds(130, 6, 30, 30);
         add(usnLabel);
 
         nameLabel = new JLabel("NAME");
@@ -29,7 +29,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         add(nameLabel);
 
         attendedLabel = new JLabel("ATTENDED");
-        attendedLabel.setBounds(615, 6, 100,30);
+        attendedLabel.setBounds(615, 6, 100, 30);
         add(attendedLabel);
 
         totalLabel = new JLabel("TOTAL");
@@ -65,6 +65,22 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         applyFilter.addActionListener(this);
         add(applyFilter);
 
+        JLabel saveCSV = new JLabel("SAVE CSV:");
+        saveCSV.setFont(new Font("Tahoma", Font.BOLD, 14));
+        saveCSV.setBounds(430, 560, 80, 30);
+        add(saveCSV);
+
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon_white.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(510, 560, 30, 30);
+        saveBtn.setBackground(Color.BLACK);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
+
+
         close = new JButton("Close");
         close.setBounds(800, 560, 150, 30);
         close.setForeground(Color.WHITE);
@@ -87,7 +103,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         String query = "SELECT S.USN, S.NAME, A.ATTENDED, A.TOTAL FROM STUDENT S, ATTENDANCE A WHERE A.USN=S.USN AND A.SUBCODE = '" + subCode + "'";
         String orderBy = "ORDER BY S.USN";
         String sect = String.valueOf(sec.getSelectedItem());
-        if(!sect.equals("All")){
+        if (!sect.equals("All")) {
             query += " AND S.SEC = '" + sect + "'";
         }
         query += orderBy;
@@ -154,11 +170,13 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         if (e.getSource() == applyFilter) {
             String newQuery = getQuery();
             loadStudents(newQuery);
-        }  else if(e.getSource() == subject){
+        } else if (e.getSource() == subject) {
             System.out.println("Clicked");
             loadSection();
         } else if (e.getSource() == close) {
             this.setVisible(false);
+        } else if (e.getSource() == saveBtn) {
+            new SaveCSV();
         }
     }
 

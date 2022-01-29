@@ -4,12 +4,15 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StudentAttendanceInfo extends JFrame {
+public class StudentAttendanceInfo extends JFrame implements ActionListener {
     JLabel subCodeLabel, subTitleLabel, ia1MarksLabel,ia2MarksLabel, seMarksLabel;
     JTable scoresTable;
+    JButton saveBtn;
 
     StudentAttendanceInfo(){
         subCodeLabel = new JLabel("SUBCODE");
@@ -30,14 +33,29 @@ public class StudentAttendanceInfo extends JFrame {
 
 
         scoresTable = new JTable();
-        scoresTable.setBounds(20, 35, 800, 260);
+        scoresTable.setBounds(20, 35, 800, 200);
         add(scoresTable);
 
         fetchAttendance();
 
+        JLabel saveCSV = new JLabel("SAVE CSV:");
+        saveCSV.setFont(new Font("Tahoma", Font.BOLD, 14));
+        saveCSV.setBounds(700, 240, 80, 30);
+        add(saveCSV);
+
+        ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon_white.png"));
+        Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        saveBtn = new JButton(icon);
+        saveBtn.setBounds(780, 240, 30, 30);
+        saveBtn.setBackground(Color.BLACK);
+        saveBtn.addActionListener(this);
+        add(saveBtn);
+
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setBounds(300, 100, 840, 280);
+        setBounds(300, 100, 840, 310);
         setVisible(true);
     }
 
@@ -53,6 +71,12 @@ public class StudentAttendanceInfo extends JFrame {
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == saveBtn){
+            new SaveCSV();
+        }
+    }
     public static void main(String[] args) {
         new StudentAttendanceInfo();
     }
