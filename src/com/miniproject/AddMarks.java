@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class AddMarks extends JFrame implements ActionListener {
     JLabel heading, semLabel, semVal, subLabel, secLabel;
-    JLabel usnLabel, nameLabel, nameValLabel, mark1Label, mark2Label, seMarkLabel;
-    JTextField mark1TF, mark2TF, seMarkTF;
+    JLabel usnLabel, nameLabel, nameValLabel, mark1Label, mark2Label, mark3Label, seMarkLabel;
+    JTextField mark1TF, mark2TF, mark3TF, seMarkTF;
     JComboBox secCB, subjectCB, usnCB;
     JButton update, close, fetchUSNBtn;
-    String subCode, sem, sec, usn, ia1Marks, ia2Marks, seMarks;
+    String subCode, sem, sec, usn, ia1Marks, ia2Marks, ia3Marks, seMarks;
     Boolean subFetched = false, usnFetched = false;
     ArrayList usnAL, nameAL, subjects, sections;
 
@@ -91,36 +91,45 @@ public class AddMarks extends JFrame implements ActionListener {
         add(mark1Label);
 
         mark1TF = new JTextField();
-        mark1TF.setBounds(140, 170, 100, 30);
+        mark1TF.setBounds(140, 170, 90, 30);
         add(mark1TF);
 
         mark2Label = new JLabel("IA2 MARKS: ");
-        mark2Label.setBounds(40, 210, 100, 30);
+        mark2Label.setBounds(250, 170, 100, 30);
         mark2Label.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(mark2Label);
 
         mark2TF = new JTextField();
-        mark2TF.setBounds(140, 210, 100, 30);
+        mark2TF.setBounds(350, 170, 90,30);
         add(mark2TF);
 
-        seMarkLabel = new JLabel("SE MARKS");
-        seMarkLabel.setBounds(40, 250, 100, 30);
+        mark3Label = new JLabel("IA3 MARKS: ");
+        mark3Label.setBounds(40, 210, 100, 30);
+        mark3Label.setFont(new Font("Tahoma", Font.BOLD, 14));
+        add(mark3Label);
+
+        mark3TF = new JTextField();
+        mark3TF.setBounds(140, 210, 90, 30);
+        add(mark3TF);
+
+        seMarkLabel = new JLabel("SE MARKS: ");
+        seMarkLabel.setBounds(250, 210, 100, 30);
         seMarkLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(seMarkLabel);
 
         seMarkTF = new JTextField();
-        seMarkTF.setBounds(140, 250, 100, 30);
+        seMarkTF.setBounds(350, 210, 90, 30);
         add(seMarkTF);
 
         update = new JButton("UPDATE");
-        update.setBounds(40, 300, 150, 30);
+        update.setBounds(40, 260, 150, 30);
         update.setForeground(Color.WHITE);
         update.setBackground(Color.BLACK);
         update.addActionListener(this);
         add(update);
 
         close = new JButton("CLOSE");
-        close.setBounds(295, 300, 150, 30);
+        close.setBounds(295, 260, 150, 30);
         close.setForeground(Color.WHITE);
         close.setBackground(Color.BLACK);
         close.addActionListener(this);
@@ -130,7 +139,7 @@ public class AddMarks extends JFrame implements ActionListener {
 
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
-        setBounds(300, 100, 500, 400);
+        setBounds(300, 100, 500, 360);
         setVisible(true);
     }
 
@@ -215,6 +224,7 @@ public class AddMarks extends JFrame implements ActionListener {
             usn = String.valueOf(usnCB.getSelectedItem());
             ia1Marks = mark1TF.getText();
             ia2Marks = mark2TF.getText();
+            ia3Marks = mark3TF.getText();
             seMarks = seMarkTF.getText();
             Boolean updateNeeded = false;
 
@@ -248,6 +258,13 @@ public class AddMarks extends JFrame implements ActionListener {
                     updateQuery += ", ";
                 }
                 updateQuery += "IA2MARKS = '" + ia2Marks + "' ";
+                updateNeeded = true;
+            }
+            if(!ia3Marks.equals("")){
+                if(updateNeeded){
+                    updateQuery += ", ";
+                }
+                updateQuery += "IA3MARKS = '" + ia3Marks + "' ";
                 updateNeeded = true;
             }
             if(!seMarks.equals("")){
