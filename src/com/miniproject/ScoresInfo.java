@@ -12,32 +12,41 @@ import java.util.ArrayList;
 
 public class ScoresInfo extends JFrame implements ActionListener {
     JTable scoresTable;
-    JLabel sem, semVal, usnLabel, nameLabel, ia1MarksLabel, ia2MarksLabel, seMarksLabel;
+    JLabel sem, semVal, usnLabel, nameLabel, ia1MarksLabel, ia2MarksLabel, ia3MarksLabel;
+    JLabel finalIAMarksLabel, seMarksLabel;
     JButton applyFilter, close, saveBtn;
     JComboBox subject, sec;
     ArrayList subjects, sections;
     Boolean subFetched = false;
 
     ScoresInfo() {
+
         usnLabel = new JLabel("USN");
-        usnLabel.setBounds(105, 6, 30, 30);
+        usnLabel.setBounds(80, 6, 30, 30);
         add(usnLabel);
 
         nameLabel = new JLabel("NAME");
-        nameLabel.setBounds(300, 6, 40, 30);
+        nameLabel.setBounds(215, 6, 40, 30);
         add(nameLabel);
 
         ia1MarksLabel = new JLabel("IA1 MARKS");
-        ia1MarksLabel.setBounds(485, 6, 100, 30);
+        ia1MarksLabel.setBounds(345, 6, 100, 30);
         add(ia1MarksLabel);
 
         ia2MarksLabel = new JLabel("IA2 MARKS");
-        ia2MarksLabel.setBounds(685, 6, 100, 30);
+        ia2MarksLabel.setBounds(490, 6, 100, 30);
         add(ia2MarksLabel);
 
+        ia3MarksLabel = new JLabel("IA3 MARKS");
+        ia3MarksLabel.setBounds(630, 6, 100, 30);
+        add(ia3MarksLabel);
 
-        seMarksLabel = new JLabel("SEMARKS");
-        seMarksLabel.setBounds(885, 6, 100, 30);
+        finalIAMarksLabel = new JLabel("FINAL IA MARKS");
+        finalIAMarksLabel.setBounds(760, 6, 100, 30);
+        add(finalIAMarksLabel);
+
+        seMarksLabel = new JLabel("SE MARKS");
+        seMarksLabel.setBounds(918, 6, 100, 30);
         add(seMarksLabel);
 
         subjects = new ArrayList();
@@ -108,7 +117,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
 
     String getQuery() {
         String subCode = String.valueOf(subject.getSelectedItem());
-        String query = "SELECT S.USN, S.NAME, M.IA1MARKS, M.IA2MARKS, M.SEMARKS FROM STUDENT S, MARKS M WHERE S.USN=M.USN AND M.SUBCODE='" + subCode + "'";
+        String query = "SELECT S.USN, S.NAME, M.IA1MARKS, M.IA2MARKS, M.IA3MARKS, M.FINALIAMARKS, M.SEMARKS FROM STUDENT S, MARKS M WHERE S.USN=M.USN AND M.SUBCODE='" + subCode + "'";
         String orderBy = "ORDER BY S.USN";
         String sect = String.valueOf(sec.getSelectedItem());
         if (!sect.equals("All")) {

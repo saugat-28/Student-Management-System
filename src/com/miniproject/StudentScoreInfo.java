@@ -10,29 +10,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentScoreInfo extends JFrame implements ActionListener {
-    JLabel subCodeLabel, subTitleLabel, ia1MarksLabel,ia2MarksLabel, seMarksLabel;
+    JLabel subCodeLabel, subTitleLabel, ia1MarksLabel, ia2MarksLabel, ia3MarksLabel;
+    JLabel finalIAMarksLabel, seMarksLabel;
     JTable scoresTable;
     JButton saveBtn;
 
-    StudentScoreInfo(){
+    StudentScoreInfo() {
+
         subCodeLabel = new JLabel("SUBCODE");
-        subCodeLabel.setBounds(90, 6, 80, 30);
+        subCodeLabel.setBounds(55, 6, 80, 30);
         add(subCodeLabel);
 
         subTitleLabel = new JLabel("SUBJECT TITLE");
-        subTitleLabel.setBounds(270, 6, 100, 30);
+        subTitleLabel.setBounds(210, 6, 100, 30);
         add(subTitleLabel);
 
         ia1MarksLabel = new JLabel("IA1 MARKS");
-        ia1MarksLabel.setBounds(485, 6, 100, 30);
+        ia1MarksLabel.setBounds(395, 6, 100, 30);
         add(ia1MarksLabel);
 
         ia2MarksLabel = new JLabel("IA2 MARKS");
-        ia2MarksLabel.setBounds(685, 6, 100, 30);
+        ia2MarksLabel.setBounds(525, 6, 100, 30);
         add(ia2MarksLabel);
 
-        seMarksLabel = new JLabel("SEMARKS");
-        seMarksLabel.setBounds(885, 6, 100, 30);
+        ia3MarksLabel = new JLabel("IA3 MARKS");
+        ia3MarksLabel.setBounds(655, 6, 100, 30);
+        add(ia3MarksLabel);
+
+        finalIAMarksLabel = new JLabel("FINAL IA MARKS");
+        finalIAMarksLabel.setBounds(772, 6, 100, 30);
+        add(finalIAMarksLabel);
+
+        seMarksLabel = new JLabel("SE MARKS");
+        seMarksLabel.setBounds(920, 6, 100, 30);
         add(seMarksLabel);
 
         scoresTable = new JTable();
@@ -62,20 +72,22 @@ public class StudentScoreInfo extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    void loadScores(){
-        String query = "SELECT S.SUBCODE, S.NAME, M.IA1MARKS, M.IA2MARKS, M.SEMARKS FROM SUBJECT S, MARKS M WHERE S.SUBCODE = M.SUBCODE AND M.USN = '" + UserDetails.usn + "'";
+    void loadScores() {
+        String query = "SELECT S.SUBCODE, S.NAME, M.IA1MARKS, M.IA2MARKS, M.IA3MARKS, M.FINALIAMARKS, M.SEMARKS FROM SUBJECT S, MARKS M WHERE S.SUBCODE = M.SUBCODE AND M.USN = '" + UserDetails.usn + "'";
         UserDetails.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet scores = conn.statement.executeQuery(query);
             scoresTable.setModel(DbUtils.resultSetToTableModel(scores));
+            scoresTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == saveBtn){
+        if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }

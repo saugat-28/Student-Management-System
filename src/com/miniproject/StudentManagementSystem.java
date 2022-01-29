@@ -9,8 +9,6 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
 
     StudentManagementSystem(){
         setBounds(200, 200, 1030, 480);
-//        setSize(400, 400);
-//        setLocation(300, 300);
 
         ImageIcon icon1 = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jss.jpg"));
         JLabel label1= new JLabel(icon1);
@@ -33,20 +31,6 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         setLayout(null);
         setVisible(true);
 
-//        while (true){
-//            label2.setVisible(false);
-//            try {
-//                Thread.sleep(500);
-//            } catch (Exception e){
-//                e.printStackTrace();
-//            }
-//            label2.setVisible(true);
-//            try{
-//                Thread.sleep(500);
-//            } catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -60,3 +44,50 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
 
 
 }
+/*
+# CODE FOR BLINKING TEXT AND ADDITIONAL SETTINGS FOR JAVA FRAME
+        while (true){
+            label2.setVisible(false);
+            try {
+                Thread.sleep(500);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            label2.setVisible(true);
+            try{
+                Thread.sleep(500);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+# CODE FOR SETTING PARAMETERS FOR FRAME
+        setSize(400, 400);
+        setLocation(300, 300);
+
+# CODE FOR GETTING TABLE MODEL FROM SQL RESULT SET
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+            throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        // names of columns
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        // data of the table
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while (rs.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(rs.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        return new DefaultTableModel(data, columnNames);
+
+    }
+ */
