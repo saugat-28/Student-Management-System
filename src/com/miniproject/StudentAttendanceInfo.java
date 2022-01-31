@@ -10,11 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentAttendanceInfo extends JFrame implements ActionListener {
-    JLabel subCodeLabel, subTitleLabel, ia1MarksLabel,ia2MarksLabel, seMarksLabel;
+    JLabel subCodeLabel, subTitleLabel, ia1MarksLabel, ia2MarksLabel, seMarksLabel;
     JTable scoresTable;
     JButton saveBtn;
 
-    StudentAttendanceInfo(){
+    StudentAttendanceInfo() {
         subCodeLabel = new JLabel("SUBCODE");
         subCodeLabel.setBounds(95, 6, 80, 30);
         add(subCodeLabel);
@@ -59,9 +59,9 @@ public class StudentAttendanceInfo extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    void fetchAttendance(){
-        String query = "SELECT S.SUBCODE, S.NAME, A.ATTENDED, A.TOTAL FROM SUBJECT S, ATTENDANCE A WHERE S.SUBCODE = A.SUBCODE AND A.USN = '" + UserDetails.usn + "'";
-        UserDetails.recentQuery = query;
+    void fetchAttendance() {
+        String query = "SELECT S.SUBCODE, S.NAME, A.ATTENDED, A.TOTAL FROM SUBJECT S, ATTENDANCE A WHERE S.SUBCODE = A.SUBCODE AND A.USN = '" + Common.usn + "'";
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet scores = conn.statement.executeQuery(query);
@@ -73,10 +73,11 @@ public class StudentAttendanceInfo extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == saveBtn){
+        if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }
+
     public static void main(String[] args) {
         new StudentAttendanceInfo();
     }

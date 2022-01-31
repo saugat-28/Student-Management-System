@@ -7,31 +7,29 @@ import java.awt.event.ActionListener;
 
 public class StudentManagementSystem extends JFrame implements ActionListener {
 
-    StudentManagementSystem(){
-        setBounds(200, 200, 1030, 480);
-
+    StudentManagementSystem() {
         ImageIcon icon1 = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jss.jpg"));
-        JLabel label1= new JLabel(icon1);
-        label1.setBounds(0,0,1024,451);
+        JLabel label1 = new JLabel(icon1);
+        label1.setBounds(0, 0, 1024, 451);
         add(label1);
 
         JLabel label2 = new JLabel("Student Management System");
-        label2.setBounds(30, 5,1000, 70);
+        label2.setBounds(30, 5, 1000, 70);
         label2.setForeground(Color.BLACK);
-        label2.setFont(new Font("serif", Font.PLAIN,55));
+        label2.setFont(new Font("serif", Font.PLAIN, 55));
         label1.add(label2);
 
         JButton button1 = new JButton("Next");
-        button1.setBackground(Color.BLACK);
-        button1.setForeground(Color.WHITE);
         button1.setBounds(900, 10, 100, 30);
         button1.addActionListener(this);
         label1.add(button1);
 
+        setBounds(200, 200, 1030, 480);
+        setIconImage(Common.frameIcon.getImage());
         setLayout(null);
         setVisible(true);
-
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         new Login().setVisible(true);
@@ -90,4 +88,8 @@ public class StudentManagementSystem extends JFrame implements ActionListener {
         return new DefaultTableModel(data, columnNames);
 
     }
+
+# CODE FOR COLORING BUTTONS
+        button1.setBackground(Color.BLACK);
+        button1.setForeground(Color.WHITE);
  */

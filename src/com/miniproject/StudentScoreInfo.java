@@ -73,8 +73,8 @@ public class StudentScoreInfo extends JFrame implements ActionListener {
     }
 
     void loadScores() {
-        String query = "SELECT S.SUBCODE, S.NAME, M.IA1MARKS, M.IA2MARKS, M.IA3MARKS, M.FINALIAMARKS, M.SEMARKS FROM SUBJECT S, MARKS M WHERE S.SUBCODE = M.SUBCODE AND M.USN = '" + UserDetails.usn + "'";
-        UserDetails.recentQuery = query;
+        String query = "SELECT S.SUBCODE, S.NAME, M.IA1MARKS, M.IA2MARKS, M.IA3MARKS, M.FINALIAMARKS, M.SEMARKS FROM SUBJECT S, MARKS M WHERE S.SUBCODE = M.SUBCODE AND M.USN = '" + Common.usn + "'";
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet scores = conn.statement.executeQuery(query);

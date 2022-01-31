@@ -100,7 +100,7 @@ public class AddMarks extends JFrame implements ActionListener {
         add(mark2Label);
 
         mark2TF = new JTextField();
-        mark2TF.setBounds(350, 170, 90,30);
+        mark2TF.setBounds(350, 170, 90, 30);
         add(mark2TF);
 
         mark3Label = new JLabel("IA3 MARKS: ");
@@ -144,7 +144,7 @@ public class AddMarks extends JFrame implements ActionListener {
     }
 
     void loadSubjects() {
-        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + UserDetails.factId + "'";
+        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + Common.factId + "'";
         String subQuery1 = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + "ISE/001" + "'";
         Conn conn = new Conn();
         try {
@@ -166,7 +166,7 @@ public class AddMarks extends JFrame implements ActionListener {
 
     void loadSection() {
         subCode = String.valueOf(subjectCB.getSelectedItem());
-        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + UserDetails.factId + "' AND SUBCODE = '" + subCode + "'";
+        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + Common.factId + "' AND SUBCODE = '" + subCode + "'";
         String secQuery1 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '18CS51'";
         String secQuery2 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '" + subCode + "'";
         ArrayList sectionsAL = new ArrayList();
@@ -189,7 +189,7 @@ public class AddMarks extends JFrame implements ActionListener {
         if (subFetched) {
             this.sem = semVal.getText();
             this.sec = String.valueOf(secCB.getSelectedItem());
-            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "' AND DEPARTMENT = '" + UserDetails.dept + "'";
+            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "' AND DEPARTMENT = '" + Common.dept + "'";
             Conn conn = new Conn();
             String usn, name;
             usnAL = new ArrayList<>();
@@ -229,17 +229,17 @@ public class AddMarks extends JFrame implements ActionListener {
             Boolean updateNeeded = false;
 
             String checkQuery = "SELECT * FROM MARKS WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
-            Boolean notFound=true;
+            Boolean notFound = true;
             Conn conn = new Conn();
             try {
                 ResultSet checkRS = conn.statement.executeQuery(checkQuery);
-                if(checkRS.next()){
+                if (checkRS.next()) {
                     notFound = false;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            if(notFound){
+            if (notFound) {
                 String insertQuery = "INSERT INTO MARKS VALUES('" + usn + "', '" + subCode + "', null, null, null)";
                 try {
                     conn.statement.executeUpdate(insertQuery);
@@ -249,42 +249,42 @@ public class AddMarks extends JFrame implements ActionListener {
             }
             String updateQuery = "UPDATE MARKS SET ";
             String queryCondition = "WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
-            if(!ia1Marks.equals("")){
+            if (!ia1Marks.equals("")) {
                 updateQuery += "IA1MARKS = '" + ia1Marks + "' ";
                 updateNeeded = true;
             }
-            if(!ia2Marks.equals("")){
-                if(updateNeeded){
+            if (!ia2Marks.equals("")) {
+                if (updateNeeded) {
                     updateQuery += ", ";
                 }
                 updateQuery += "IA2MARKS = '" + ia2Marks + "' ";
                 updateNeeded = true;
             }
-            if(!ia3Marks.equals("")){
-                if(updateNeeded){
+            if (!ia3Marks.equals("")) {
+                if (updateNeeded) {
                     updateQuery += ", ";
                 }
                 updateQuery += "IA3MARKS = '" + ia3Marks + "' ";
                 updateNeeded = true;
             }
-            if(!seMarks.equals("")){
-                if(updateNeeded){
+            if (!seMarks.equals("")) {
+                if (updateNeeded) {
                     updateQuery += ", ";
                 }
                 updateQuery += "SEMARKS = '" + seMarks + "' ";
                 updateNeeded = true;
             }
-            updateQuery +=queryCondition;
-            if(updateNeeded){
+            updateQuery += queryCondition;
+            if (updateNeeded) {
                 try {
                     conn.statement.executeUpdate(updateQuery);
                     JOptionPane.showMessageDialog(null, "Marks Updated Successfully!");
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null,"An Error Occurred");
+                    JOptionPane.showMessageDialog(null, "An Error Occurred");
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Nothing to update!");
+                JOptionPane.showMessageDialog(null, "Nothing to update!");
             }
         }
     }

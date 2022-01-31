@@ -71,14 +71,14 @@ public class StudentDashboard extends JFrame implements ActionListener {
     }
 
     void fetchUsn() {
-        String query = "SELECT USN FROM STUDENT WHERE USERID = '" + UserDetails.userId + "'";
+        String query = "SELECT USN FROM STUDENT WHERE USERID = '" + Common.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
             if (resultSet.next()) {
-                UserDetails.usn = resultSet.getString(1);
+                Common.usn = resultSet.getString(1);
             }
-            System.out.println(UserDetails.usn);
+            System.out.println(Common.usn);
         } catch (SQLException e) {
             e.printStackTrace();
         }

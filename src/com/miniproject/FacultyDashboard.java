@@ -86,15 +86,15 @@ public class FacultyDashboard extends JFrame implements ActionListener {
     }
 
     void fetchFactId() {
-        String query = "SELECT FACTID, DEPARTMENT FROM FACULTY WHERE USERID = '" + UserDetails.userId + "'";
+        String query = "SELECT FACTID, DEPARTMENT FROM FACULTY WHERE USERID = '" + Common.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
             if (resultSet.next()) {
-                UserDetails.factId = resultSet.getString(1);
-                UserDetails.dept = resultSet.getString(2);
+                Common.factId = resultSet.getString(1);
+                Common.dept = resultSet.getString(2);
             }
-            System.out.println(UserDetails.factId);
+            System.out.println(Common.factId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

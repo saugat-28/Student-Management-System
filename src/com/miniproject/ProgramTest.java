@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class ProgramTest {
 
     public static void main(String[] args) {
-        UserDetails.recentQuery = "SELECT * FROM STUDENT";
+        Common.recentQuery = "SELECT * FROM STUDENT";
         new TestingFrame();
     }
 
@@ -38,7 +38,7 @@ public class ProgramTest {
 class TestingFrame extends JFrame implements ActionListener {
     JButton saveBtn;
 
-    TestingFrame(){
+    TestingFrame() {
         ImageIcon saveIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/download_icon.png"));
         Image scaledImage = saveIcon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(scaledImage);
@@ -56,14 +56,15 @@ class TestingFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == saveBtn){
+        if (e.getSource() == saveBtn) {
             System.out.println("Button Clicked");
             downloadCSV();
         }
     }
-    public void downloadCSV(){
+
+    public void downloadCSV() {
         Conn conn = new Conn();
-        String query = UserDetails.recentQuery;
+        String query = Common.recentQuery;
         Boolean includeHeaders = true;
         try {
             FileWriter filewriter = new FileWriter("database.csv");

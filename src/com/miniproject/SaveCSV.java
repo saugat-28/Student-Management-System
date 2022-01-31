@@ -38,23 +38,24 @@ public class SaveCSV extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == saveBtn){
+        if (e.getSource() == saveBtn) {
             String fileName = fileNameTF.getText();
-            if(!fileName.equals("")){
+            if (!fileName.equals("")) {
                 saveCSV(fileName);
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter a Filename!");
             }
         }
     }
-    public void saveCSV(String fileName){
+
+    public void saveCSV(String fileName) {
         String path = "D:\\";
         String file = fileName + ".csv";
         String pathToFile = path + file;
         Boolean includeHeaders = true;
         Conn conn = new Conn();
-        String query = UserDetails.recentQuery;
-        if(!query.equals("")){
+        String query = Common.recentQuery;
+        if (!query.equals("")) {
             try {
                 FileWriter filewriter = new FileWriter(pathToFile);
                 CSVWriter writer = new CSVWriter(filewriter);
@@ -71,7 +72,7 @@ public class SaveCSV extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        UserDetails.recentQuery = "SELECT * FROM STUDENT";
+        Common.recentQuery = "SELECT * FROM STUDENT";
         new SaveCSV();
     }
 }

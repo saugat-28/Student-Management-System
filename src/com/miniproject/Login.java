@@ -15,9 +15,9 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField passwordField;
     JButton loginBtn, cancelBtn;
 
-    Login(){
+    Login() {
         label1 = new JLabel("Username");
-        label1.setBounds(40,20,100,30);
+        label1.setBounds(40, 20, 100, 30);
         add(label1);
 
         label2 = new JLabel("Password");
@@ -70,10 +70,11 @@ public class Login extends JFrame implements ActionListener {
 
         setLayout(null);
         setBounds(500, 300, 600, 250);
+        setIconImage(Common.frameIcon.getImage());
         setVisible(true);
     }
 
-    void resetPrompt(){
+    void resetPrompt() {
         int confirmation = JOptionPane.showConfirmDialog(this, "ONLY ADMIN CAN RESET THEIR PASSWORD\n         Are you an administrator?", "Confrmationi", JOptionPane.YES_NO_OPTION);
         System.out.println(confirmation);
         if (confirmation == 0) {
@@ -85,7 +86,7 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == loginBtn){
+        if (e.getSource() == loginBtn) {
             String username = textField.getText();
             String password = String.valueOf(passwordField.getPassword());
             Conn conn = new Conn();
@@ -94,23 +95,23 @@ public class Login extends JFrame implements ActionListener {
             try {
                 ResultSet resultSet = conn.statement.executeQuery(query);
 
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     String userType;
                     String userTypeQuery = "SELECT USERTYPE, USERID FROM USERS WHERE USERNAME = '" + username + "'";
 
                     ResultSet userTypeSet = conn.statement.executeQuery(userTypeQuery);
                     userTypeSet.next();
                     userType = userTypeSet.getString(1);
-                    UserDetails.userId = userTypeSet.getString(2);
-                    UserDetails.userName = username;
+                    Common.userId = userTypeSet.getString(2);
+                    Common.userName = username;
 
-                    if(userType.equals("ADMIN")){
+                    if (userType.equals("ADMIN")) {
                         new AdminDashboard();
                         this.setVisible(false);
-                    } else if(userType.equals("STUDENT")){
+                    } else if (userType.equals("STUDENT")) {
                         new StudentDashboard();
                         this.setVisible(false);
-                    } else if(userType.equals("FACULTY")){
+                    } else if (userType.equals("FACULTY")) {
                         new FacultyDashboard();
                         this.setVisible(false);
                     } else {
@@ -123,7 +124,7 @@ public class Login extends JFrame implements ActionListener {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        } else if(e.getSource() == cancelBtn){
+        } else if (e.getSource() == cancelBtn) {
             System.exit(0);
         }
     }

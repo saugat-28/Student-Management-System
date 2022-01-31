@@ -84,15 +84,15 @@ public class FacultyInfo extends JFrame implements ActionListener {
 
     String getQuery() {
         String query = "SELECT NAME, FACTID, DEPARTMENT FROM FACULTY";
-        String dept= String.valueOf(department.getSelectedItem());
-        if(dept!="All"){
+        String dept = String.valueOf(department.getSelectedItem());
+        if (dept != "All") {
             query += " WHERE DEPARTMENT = '" + dept + "'";
         }
         return query;
     }
 
     void loadFaculty(String query) {
-        UserDetails.recentQuery = query;
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
@@ -104,12 +104,12 @@ public class FacultyInfo extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == applyFilter){
+        if (e.getSource() == applyFilter) {
             String filterQuery = getQuery();
             loadFaculty(filterQuery);
-        } else if(e.getSource() == back){
+        } else if (e.getSource() == back) {
             this.setVisible(false);
-        } else if(e.getSource()==saveBtn){
+        } else if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }

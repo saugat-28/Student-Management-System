@@ -126,7 +126,7 @@ public class AddAttendance extends JFrame implements ActionListener {
     }
 
     void loadSubjects() {
-        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + UserDetails.factId + "'";
+        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + Common.factId + "'";
         String subQuery1 = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + "ISE/001" + "'";
         Conn conn = new Conn();
         try {
@@ -148,7 +148,7 @@ public class AddAttendance extends JFrame implements ActionListener {
 
     void loadSection() {
         subCode = String.valueOf(subjectCB.getSelectedItem());
-        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + UserDetails.factId + "' AND SUBCODE = '" + subCode + "'";
+        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + Common.factId + "' AND SUBCODE = '" + subCode + "'";
         String secQuery1 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '18CS51'";
         String secQuery2 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '" + subCode + "'";
         ArrayList sectionsAL = new ArrayList();
@@ -171,7 +171,7 @@ public class AddAttendance extends JFrame implements ActionListener {
         if (subFetched) {
             this.sem = semVal.getText();
             this.sec = String.valueOf(secCB.getSelectedItem());
-            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "' AND  DEPARTMENT = '" + UserDetails.dept + "'";
+            String query = "SELECT USN, NAME FROM STUDENT WHERE SEM = '" + sem + "' AND SEC = '" + sec + "' AND  DEPARTMENT = '" + Common.dept + "'";
             Conn conn = new Conn();
             String usn, name;
             usnAL = new ArrayList<>();
@@ -209,17 +209,17 @@ public class AddAttendance extends JFrame implements ActionListener {
 
             if (!attended.equals("") && !total.equals("")) {
                 String checkQuery = "SELECT * FROM ATTENDANCE WHERE USN = '" + usn + "' AND SUBCODE = '" + subCode + "'";
-                Boolean notFound=true;
+                Boolean notFound = true;
                 Conn conn = new Conn();
                 try {
                     ResultSet checkRS = conn.statement.executeQuery(checkQuery);
-                    if(checkRS.next()){
+                    if (checkRS.next()) {
                         notFound = false;
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                if(notFound){
+                if (notFound) {
                     String insertQuery = "INSERT INTO ATTENDANCE VALUES('" + usn + "', '" + subCode + "', null, null)";
                     try {
                         conn.statement.executeUpdate(insertQuery);

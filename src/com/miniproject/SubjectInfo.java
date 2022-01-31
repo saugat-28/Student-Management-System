@@ -63,7 +63,7 @@ public class SubjectInfo extends JFrame implements ActionListener {
     }
 
     void loadStudents(String query) {
-        UserDetails.recentQuery = query;
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
@@ -72,12 +72,14 @@ public class SubjectInfo extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==saveBtn){
+        if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }
+
     public static void main(String[] args) {
         new SubjectInfo();
     }

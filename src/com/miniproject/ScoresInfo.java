@@ -128,7 +128,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
     }
 
     void loadStudents(String query) {
-        UserDetails.recentQuery = query;
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
@@ -139,7 +139,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
     }
 
     void loadSubject() {
-        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + UserDetails.factId + "'";
+        String subQuery = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + Common.factId + "'";
         String subQuery1 = "SELECT DISTINCT(SUBCODE) FROM ASSIGNED WHERE FACTID = '" + "ISE/001" + "'";
         Conn conn = new Conn();
         try {
@@ -161,7 +161,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
 
     void loadSection() {
         String subCode = String.valueOf(subject.getSelectedItem());
-        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + UserDetails.factId + "' AND SUBCODE = '" + subCode + "'";
+        String secQuery = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='" + Common.factId + "' AND SUBCODE = '" + subCode + "'";
         String secQuery1 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '18CS51'";
         String secQuery2 = "SELECT SEC, SEM FROM ASSIGNED WHERE FACTID='ISE/001' AND SUBCODE = '" + subCode + "'";
         ArrayList sectionsAL = new ArrayList();
@@ -190,7 +190,7 @@ public class ScoresInfo extends JFrame implements ActionListener {
             loadSection();
         } else if (e.getSource() == close) {
             this.setVisible(false);
-        } else if(e.getSource()==saveBtn){
+        } else if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }

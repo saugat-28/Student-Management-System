@@ -31,7 +31,7 @@ public class StudentInfo extends JFrame implements ActionListener {
         add(studentTable);
 
         JLabel usnLabel = new JLabel("USN");
-        usnLabel.setBounds(100, 6, 30,30);
+        usnLabel.setBounds(100, 6, 30, 30);
         add(usnLabel);
 
         JLabel nameLabel = new JLabel("NAME");
@@ -117,11 +117,11 @@ public class StudentInfo extends JFrame implements ActionListener {
         String semester = String.valueOf(sem.getSelectedItem());
         String section = String.valueOf(sec.getSelectedItem());
         String queryCondition = " WHERE DEPARTMENT = '" + dept + "'";
-        if(useFilter.isSelected()){
-            if(semester!="All"){
+        if (useFilter.isSelected()) {
+            if (semester != "All") {
                 queryCondition += " AND SEM = " + semester;
             }
-            if(section!="All"){
+            if (section != "All") {
                 queryCondition += " AND SEC = '" + section + "'";
             }
             query += queryCondition;
@@ -130,7 +130,7 @@ public class StudentInfo extends JFrame implements ActionListener {
     }
 
     void loadStudents(String query) {
-        UserDetails.recentQuery = query;
+        Common.recentQuery = query;
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
@@ -152,12 +152,12 @@ public class StudentInfo extends JFrame implements ActionListener {
                 sem.setEnabled(false);
                 sec.setEnabled(false);
             }
-        } else if(e.getSource() == applyFilter){
+        } else if (e.getSource() == applyFilter) {
             String newQuery = getQuery();
             loadStudents(newQuery);
-        } else if(e.getSource() == close){
+        } else if (e.getSource() == close) {
             this.setVisible(false);
-        }  else if(e.getSource()==saveBtn){
+        } else if (e.getSource() == saveBtn) {
             new SaveCSV();
         }
     }
