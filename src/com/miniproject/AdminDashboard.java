@@ -113,12 +113,6 @@ public class AdminDashboard extends JFrame implements ActionListener {
         imageLabel.setBounds(0, 0, 1560, 800);
         add(imageLabel);
 
-//        JLabel welcomeLabel = new JLabel("JSS Academy of Technical Education Welcomes You");
-//        welcomeLabel.setBounds(400, 50, 800, 50);
-//        welcomeLabel.setForeground(Color.BLACK);
-//        welcomeLabel.setFont(new Font("Book Antiqua", Font.PLAIN, 30));
-//        imageLabel.add(welcomeLabel);
-
         ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssate.png"));
         Image scaledLogo = jssLogo.getImage().getScaledInstance(338, 128, Image.SCALE_DEFAULT);
         ImageIcon scaledJssLogo = new ImageIcon(scaledLogo);
@@ -126,24 +120,22 @@ public class AdminDashboard extends JFrame implements ActionListener {
         jssLabel.setBounds(650, 50, 338, 128);
         imageLabel.add(jssLabel);
 
-        JLabel userType = new JLabel("ADMIN");
-        userType.setBounds(1418, 140, 100, 30);
-        userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        userType.setForeground(Color.BLUE);
-        imageLabel.add(userType);
+        JLabel adminLabel = new JLabel("ADMIN");
+        adminLabel.setBounds(1404, 175, 60, 30);
+        adminLabel.setForeground(Color.BLUE.darker());
+        adminLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+        imageLabel.add(adminLabel);
 
-        ImageIcon userIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/user.png"));
+        ImageIcon userIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/admin.png"));
         Image scaledIcon = userIcon.getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH);
         ImageIcon scaledUserIcon = new ImageIcon(scaledIcon);
         userLabel = new JLabel(scaledUserIcon);
-        userLabel.setBounds(1350, 30, 180, 180);
+        userLabel.setBounds(1340, 30, 180, 180);
         imageLabel.add(userLabel);
 
         setLayout(null);
         setIconImage(Common.frameIcon.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
-        // setUndecorated(true); /*Removes Window Navigation Buttons*/
-        // setBounds(0,0,1910, 1000); /*Used if Extended State is not used */
         setVisible(true);
     }
 
@@ -191,3 +183,9 @@ public class AdminDashboard extends JFrame implements ActionListener {
 
     }
 }
+
+/*
+# JAVA FRAME TWEAKS
+* setUndecorated(true); /*Removes Window Navigation Buttons
+* setBounds(0,0,1910, 1000); /*Used if Extended State is not used
+*/
