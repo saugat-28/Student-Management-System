@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class AdminDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
     JMenu view, addNew, delete, assign, user;
+    JLabel userLabel, jssLabel, imageLabel;
     JMenuItem home, student, faculty, subject; // For MenuBar
     JMenuItem addStudents, addFaculty, addSubject; // For AddNew Menu
     JMenuItem deleteStudent, deleteFaculty, deleteSubject; // For Edit Menu
@@ -108,7 +109,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
         ImageIcon finalImage = new ImageIcon(scaledImage);
-        JLabel imageLabel = new JLabel(finalImage);
+        imageLabel = new JLabel(finalImage);
         imageLabel.setBounds(0, 0, 1560, 800);
         add(imageLabel);
 
@@ -121,9 +122,22 @@ public class AdminDashboard extends JFrame implements ActionListener {
         ImageIcon jssLogo = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssate.png"));
         Image scaledLogo = jssLogo.getImage().getScaledInstance(338, 128, Image.SCALE_DEFAULT);
         ImageIcon scaledJssLogo = new ImageIcon(scaledLogo);
-        JLabel jssLabel = new JLabel(scaledJssLogo);
+        jssLabel = new JLabel(scaledJssLogo);
         jssLabel.setBounds(650, 50, 338, 128);
         imageLabel.add(jssLabel);
+
+        JLabel userType = new JLabel("ADMIN");
+        userType.setBounds(1418, 140, 100, 30);
+        userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        userType.setForeground(Color.BLUE);
+        imageLabel.add(userType);
+
+        ImageIcon userIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/user.png"));
+        Image scaledIcon = userIcon.getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH);
+        ImageIcon scaledUserIcon = new ImageIcon(scaledIcon);
+        userLabel = new JLabel(scaledUserIcon);
+        userLabel.setBounds(1350, 30, 180, 180);
+        imageLabel.add(userLabel);
 
         setLayout(null);
         setIconImage(Common.frameIcon.getImage());
@@ -132,6 +146,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         // setBounds(0,0,1910, 1000); /*Used if Extended State is not used */
         setVisible(true);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class StudentDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
+    JLabel userLabel;
     JMenuItem home, scores, attendance, credits, logOut;
     JMenu user;
 
@@ -63,6 +64,33 @@ public class StudentDashboard extends JFrame implements ActionListener {
 
         fetchUsn();
 
+        JLabel userType = new JLabel("STUDENT");
+        userType.setBounds(1410, 140, 100, 30);
+        userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        userType.setForeground(Color.BLUE);
+        imageLabel.add(userType);
+
+        JLabel userName = new JLabel(Common.personName);
+        userName.setBounds(1365, 155, 150, 30);
+        userName.setHorizontalAlignment(SwingConstants.CENTER);
+        userName.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        userName.setForeground(Color.BLUE);
+        imageLabel.add(userName);
+
+        JLabel userIdentifier = new JLabel(Common.usn);
+        userIdentifier.setBounds(1365, 170, 150, 30);
+        userIdentifier.setHorizontalAlignment(SwingConstants.CENTER);
+        userIdentifier.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        userIdentifier.setForeground(Color.BLUE);
+        imageLabel.add(userIdentifier);
+
+        ImageIcon userIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/user.png"));
+        Image scaledIcon = userIcon.getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH);
+        ImageIcon scaledUserIcon = new ImageIcon(scaledIcon);
+        userLabel = new JLabel(scaledUserIcon);
+        userLabel.setBounds(1350, 30, 180, 180);
+        imageLabel.add(userLabel);
+
         setLayout(null);
         setIconImage(Common.frameIcon.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
@@ -72,12 +100,13 @@ public class StudentDashboard extends JFrame implements ActionListener {
     }
 
     void fetchUsn() {
-        String query = "SELECT USN FROM STUDENT WHERE USERID = '" + Common.userId + "'";
+        String query = "SELECT USN, NAME FROM STUDENT WHERE USERID = '" + Common.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
             if (resultSet.next()) {
                 Common.usn = resultSet.getString(1);
+                Common.personName = resultSet.getString(2);
             }
             System.out.println(Common.usn);
         } catch (SQLException e) {

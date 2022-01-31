@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class FacultyDashboard extends JFrame implements ActionListener {
     JMenuBar menuBar;
+    JLabel userLabel;
     JMenuItem home, viewScores, viewAttendance, addScores, addAttendance, credits, logOut;
     JMenu userMenu, viewMenu, addMenu;
 
@@ -78,6 +79,34 @@ public class FacultyDashboard extends JFrame implements ActionListener {
 
         fetchFactId();
 
+        JLabel userType = new JLabel("FACULTY");
+        userType.setBounds(1411, 140, 100, 30);
+        userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        userType.setForeground(Color.BLUE);
+        imageLabel.add(userType);
+
+        JLabel userName = new JLabel(Common.personName);
+        userName.setBounds(1365, 155, 150, 30);
+        userName.setHorizontalAlignment(SwingConstants.CENTER);
+        userName.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        userName.setForeground(Color.BLUE);
+        imageLabel.add(userName);
+
+        JLabel userIdentifier = new JLabel(Common.factId);
+        userIdentifier.setBounds(1365, 170, 150, 30);
+        userIdentifier.setHorizontalAlignment(SwingConstants.CENTER);
+        userIdentifier.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        userIdentifier.setForeground(Color.BLUE);
+        imageLabel.add(userIdentifier);
+
+        ImageIcon userIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/user.png"));
+        Image scaledIcon = userIcon.getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH);
+        ImageIcon scaledUserIcon = new ImageIcon(scaledIcon);
+        userLabel = new JLabel(scaledUserIcon);
+        userLabel.setBounds(1350, 30, 180, 180);
+        imageLabel.add(userLabel);
+
+
         setLayout(null);
         setIconImage(Common.frameIcon.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
@@ -87,13 +116,14 @@ public class FacultyDashboard extends JFrame implements ActionListener {
     }
 
     void fetchFactId() {
-        String query = "SELECT FACTID, DEPARTMENT FROM FACULTY WHERE USERID = '" + Common.userId + "'";
+        String query = "SELECT FACTID, DEPARTMENT, NAME FROM FACULTY WHERE USERID = '" + Common.userId + "'";
         Conn conn = new Conn();
         try {
             ResultSet resultSet = conn.statement.executeQuery(query);
             if (resultSet.next()) {
                 Common.factId = resultSet.getString(1);
                 Common.dept = resultSet.getString(2);
+                Common.personName = resultSet.getString(3);
             }
             System.out.println(Common.factId);
         } catch (SQLException e) {
