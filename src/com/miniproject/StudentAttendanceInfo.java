@@ -54,6 +54,7 @@ public class StudentAttendanceInfo extends JFrame implements ActionListener {
         add(saveBtn);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 840, 310);
         setVisible(true);

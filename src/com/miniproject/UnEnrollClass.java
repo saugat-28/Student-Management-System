@@ -12,7 +12,7 @@ public class UnEnrollClass extends JFrame implements ActionListener {
     JTextField subCodeTF;
     JButton fetchInfoBtn, removeBtn, cancelBtn;
     String subCode;
-    Boolean fetched=false;
+    Boolean fetched = false;
 
     UnEnrollClass() {
         headingLabel = new JLabel("UN-ENROLL CLASS FOR SUBJECT");
@@ -63,20 +63,21 @@ public class UnEnrollClass extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 570, 250);
         setVisible(true);
     }
 
-    void fetchDetails(){
+    void fetchDetails() {
         this.subCode = subCodeTF.getText();
-        if(!subCode.equals("")){
+        if (!subCode.equals("")) {
             String query = "SELECT SEM FROM ENROLLED WHERE SUBCODE = '" + subCode + "'";
             Conn conn = new Conn();
             try {
                 ResultSet resultSet = conn.statement.executeQuery(query);
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     semVal.setText(resultSet.getString(1));
-                    fetched=true;
+                    fetched = true;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -85,8 +86,8 @@ public class UnEnrollClass extends JFrame implements ActionListener {
         }
     }
 
-    void deleteEnrollment(){
-        if(fetched){
+    void deleteEnrollment() {
+        if (fetched) {
             String query = "DELETE FROM ENROLLED WHERE SUBCODE = '" + subCode + "'";
             Conn conn = new Conn();
             try {
@@ -106,9 +107,9 @@ public class UnEnrollClass extends JFrame implements ActionListener {
         if (e.getSource() == fetchInfoBtn) {
             fetchDetails();
         } else if (e.getSource() == removeBtn) {
-            if(fetched){
+            if (fetched) {
                 int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete enrollment of " + this.subCode + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if(confirmation == 0){
+                if (confirmation == 0) {
                     deleteEnrollment();
                     this.setVisible(false);
                 }

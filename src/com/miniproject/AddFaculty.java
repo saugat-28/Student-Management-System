@@ -93,6 +93,7 @@ public class AddFaculty extends JFrame implements ActionListener {
         add(cancelButton);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(400, 200, 750, 400);
         setVisible(true);
@@ -120,7 +121,7 @@ public class AddFaculty extends JFrame implements ActionListener {
             try {
                 ResultSet userIdRS = conn.statement.executeQuery(userIDQuery);
                 userIdRS.next();
-                String id =  userIdRS.getString(1);
+                String id = userIdRS.getString(1);
                 userId = Integer.parseInt(id);
             } catch (SQLException ex) {
                 ex.printStackTrace();

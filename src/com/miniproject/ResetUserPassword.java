@@ -63,6 +63,7 @@ public class ResetUserPassword extends JFrame implements ActionListener {
         add(cancel);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 400, 270);
         setVisible(true);
@@ -72,14 +73,14 @@ public class ResetUserPassword extends JFrame implements ActionListener {
         userType = String.valueOf(userTypeCB.getSelectedItem());
         username = usernameTF.getText();
         password = passwordTF.getText();
-        String updateQuery = "UPDATE USERS SET PASSWORD ='" +password+ "' WHERE USERNAME = '" + username + "' AND USERTYPE = '" + userType +"'";
+        String updateQuery = "UPDATE USERS SET PASSWORD ='" + password + "' WHERE USERNAME = '" + username + "' AND USERTYPE = '" + userType + "'";
         Conn conn = new Conn();
         try {
             conn.statement.executeUpdate(updateQuery);
             JOptionPane.showMessageDialog(null, "Password Updated Successfully");
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null,"An Error Occurred");
+            JOptionPane.showMessageDialog(null, "An Error Occurred");
         }
     }
 

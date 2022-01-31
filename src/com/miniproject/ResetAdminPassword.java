@@ -71,13 +71,14 @@ public class ResetAdminPassword extends JFrame implements ActionListener {
         add(cancel);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 400, 300);
         setVisible(true);
     }
 
     void resetPassword() {
-        String userId="",phoneDB="", backupDB="";
+        String userId = "", phoneDB = "", backupDB = "";
         username = usernameTF.getText();
         phone = phoneTF.getText();
         backupCode = backupCodeTF.getText();
@@ -87,21 +88,21 @@ public class ResetAdminPassword extends JFrame implements ActionListener {
             Conn conn = new Conn();
             try {
                 ResultSet userIdRs = conn.statement.executeQuery(checkUserName);
-                if(userIdRs.next()){
+                if (userIdRs.next()) {
                     userId = userIdRs.getString(1);
                     userNameFound = true;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            if(userNameFound){
-                String verificationQuery = "SELECT PHONE, BACKUPCODE FROM ADMINISTRATOR WHERE USERID = '" + userId +"'";
+            if (userNameFound) {
+                String verificationQuery = "SELECT PHONE, BACKUPCODE FROM ADMINISTRATOR WHERE USERID = '" + userId + "'";
                 try {
                     ResultSet verificationRS = conn.statement.executeQuery(verificationQuery);
-                    if(verificationRS.next()){
+                    if (verificationRS.next()) {
                         phoneDB = verificationRS.getString(1);
                         backupDB = verificationRS.getString(2);
-                        if(phoneDB.equals(phone) && backupDB.equals(backupCode)){
+                        if (phoneDB.equals(phone) && backupDB.equals(backupCode)) {
                             verified = true;
                         }
                     }
@@ -109,9 +110,9 @@ public class ResetAdminPassword extends JFrame implements ActionListener {
                     e.printStackTrace();
                 }
             }
-            if(verified){
+            if (verified) {
                 password = passwordTF.getText();
-                if(!password.equals("")){
+                if (!password.equals("")) {
                     String updateQuery = "UPDATE USERS SET PASSWORD = '" + password + "' WHERE USERNAME = '" + username + "'";
                     try {
                         conn.statement.executeUpdate(updateQuery);

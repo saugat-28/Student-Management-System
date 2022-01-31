@@ -115,6 +115,7 @@ public class UnAssignSubject extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 650, 400);
         setVisible(true);
     }

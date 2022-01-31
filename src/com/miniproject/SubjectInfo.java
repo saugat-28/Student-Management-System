@@ -47,6 +47,7 @@ public class SubjectInfo extends JFrame implements ActionListener {
         add(saveBtn);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(450, 200, 1055, 600);
         setVisible(true);

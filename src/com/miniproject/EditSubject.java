@@ -67,6 +67,7 @@ public class EditSubject extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 650, 240);
         setVisible(true);
     }
@@ -116,7 +117,7 @@ public class EditSubject extends JFrame implements ActionListener {
         } else if (e.getSource() == deleteBtn) {
             int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete details of " + this.subCode + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
             System.out.println(confirmation);
-            if (confirmation == 0){
+            if (confirmation == 0) {
                 deleteSubject();
             }
         } else if (e.getSource() == cancelBtn) {

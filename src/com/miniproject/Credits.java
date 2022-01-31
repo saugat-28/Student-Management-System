@@ -9,6 +9,7 @@ public class Credits extends JFrame {
     static String madeBy = "\n                           MADE BY:\n        1JS19IS088 - Saugat Shrivastava\n        1JS19IS092 - Shreya Prasad";
 
     Credits() {
-        JOptionPane.showMessageDialog(null, subCode+subject + title + madeBy);
+        setIconImage(Common.frameIcon.getImage());
+        JOptionPane.showMessageDialog(null, subCode + subject + title + madeBy);
     }
 }

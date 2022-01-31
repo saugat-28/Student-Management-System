@@ -12,7 +12,7 @@ public class EnrollClass extends JFrame implements ActionListener {
     JButton fetchInfoBtn, assignBtn, cancelBtn;
     JTextField subCodeTF;
     JComboBox semCB;
-    Boolean fetched=false;
+    Boolean fetched = false;
     String subCode, sem;
 
     EnrollClass() {
@@ -76,6 +76,7 @@ public class EnrollClass extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 650, 300);
         setVisible(true);
     }
@@ -87,7 +88,7 @@ public class EnrollClass extends JFrame implements ActionListener {
             Conn conn = new Conn();
             try {
                 ResultSet resultSet = conn.statement.executeQuery(query);
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     subTitleVal.setText(resultSet.getString(1));
                     fetched = true;
                 } else {
@@ -114,9 +115,9 @@ public class EnrollClass extends JFrame implements ActionListener {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "An Error Occurred");
             }
-        } else if(!fetched){
+        } else if (!fetched) {
             JOptionPane.showMessageDialog(null, "Please Fetch Details of Subject and Verify");
-        } else if(sem.equals("-")){
+        } else if (sem.equals("-")) {
             JOptionPane.showMessageDialog(null, "Please Select a semester");
         }
     }

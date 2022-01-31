@@ -74,6 +74,7 @@ public class FacultyInfo extends JFrame implements ActionListener {
         add(saveBtn);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(400, 150, 750, 600);
         setVisible(true);

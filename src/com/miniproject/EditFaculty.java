@@ -67,18 +67,19 @@ public class EditFaculty extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 650, 240);
         setVisible(true);
     }
 
-    void fetchDetails(){
+    void fetchDetails() {
         this.factId = factIdTF.getText();
-        if(!factId.equals("")){
+        if (!factId.equals("")) {
             String query = "SELECT * FROM FACULTY WHERE FACTID = '" + factId + "'";
             Conn conn = new Conn();
             try {
                 ResultSet resultSet = conn.statement.executeQuery(query);
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     String name = resultSet.getString(2);
                     String dept = resultSet.getString(4);
 
@@ -95,7 +96,7 @@ public class EditFaculty extends JFrame implements ActionListener {
         }
     }
 
-    void deleteFaculty(){
+    void deleteFaculty() {
 
         String userIdQuery = "SELECT USERID FROM FACULTY WHERE FACTID = '" + this.factId + "'";
         Conn conn = new Conn();
@@ -116,15 +117,15 @@ public class EditFaculty extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == fetchInfoBtn){
-                fetchDetails();
-        } else if(e.getSource() == deleteBtn){
+        if (e.getSource() == fetchInfoBtn) {
+            fetchDetails();
+        } else if (e.getSource() == deleteBtn) {
             int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete details of " + this.factId + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
             System.out.println(confirmation);
-            if (confirmation == 0){
+            if (confirmation == 0) {
                 deleteFaculty();
             }
-        } else if(e.getSource() == cancelBtn){
+        } else if (e.getSource() == cancelBtn) {
             this.setVisible(false);
         }
     }

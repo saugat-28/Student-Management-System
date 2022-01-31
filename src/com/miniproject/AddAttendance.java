@@ -120,6 +120,7 @@ public class AddAttendance extends JFrame implements ActionListener {
         loadSubjects();
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 500, 350);
         setVisible(true);

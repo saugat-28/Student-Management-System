@@ -138,6 +138,7 @@ public class AddMarks extends JFrame implements ActionListener {
         loadSubjects();
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 500, 360);
         setVisible(true);

@@ -67,6 +67,7 @@ public class StudentScoreInfo extends JFrame implements ActionListener {
         add(saveBtn);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 210, 1055, 310);
         setVisible(true);

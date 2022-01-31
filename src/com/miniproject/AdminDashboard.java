@@ -126,6 +126,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         imageLabel.add(jssLabel);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Used to set JFrame to full screen
         // setUndecorated(true); /*Removes Window Navigation Buttons*/
         // setBounds(0,0,1910, 1000); /*Used if Extended State is not used */

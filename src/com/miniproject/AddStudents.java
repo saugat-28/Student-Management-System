@@ -181,6 +181,7 @@ public class AddStudents extends JFrame implements ActionListener {
         add(cancelButton);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(400, 200, 800, 550);
         setVisible(true);

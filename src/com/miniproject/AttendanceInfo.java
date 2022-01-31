@@ -91,6 +91,7 @@ public class AttendanceInfo extends JFrame implements ActionListener {
         loadSubject();
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(300, 100, 1055, 640);
         setVisible(true);

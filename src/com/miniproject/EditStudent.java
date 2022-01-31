@@ -108,6 +108,7 @@ public class EditStudent extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 630, 400);
         setVisible(true);
 
@@ -283,6 +284,7 @@ class updateStudent extends JFrame implements ActionListener {
         add(cancel);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(400, 200, 420, 280);
         setVisible(true);

@@ -31,6 +31,7 @@ public class SaveCSV extends JFrame implements ActionListener {
         add(saveBtn);
 
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         getContentPane().setBackground(Color.WHITE);
         setBounds(600, 200, 300, 180);
         setVisible(true);

@@ -41,11 +41,12 @@ public class UpdateMarks extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setIconImage(Common.frameIcon.getImage());
         setBounds(400, 200, 630, 400);
         setVisible(true);
     }
 
-    void fetchDetails(){
+    void fetchDetails() {
         String name;
         Conn conn = new Conn();
         String usn = usnTF.getText();
@@ -69,7 +70,7 @@ public class UpdateMarks extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == fetchInfoBtn){
+        if (e.getSource() == fetchInfoBtn) {
             fetchDetails();
         }
     }
