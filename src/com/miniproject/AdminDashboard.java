@@ -19,9 +19,9 @@ public class AdminDashboard extends JFrame implements ActionListener {
         menuBar = new JMenuBar();
         add(menuBar);
 
-        home = new JMenuItem("Home");
-        home.addActionListener(this);
-        menuBar.add(home);
+//        home = new JMenuItem("Home");
+//        home.addActionListener(this);
+//        menuBar.add(home);
 
         view = new JMenu("View");
         menuBar.add(view);
@@ -103,7 +103,7 @@ public class AdminDashboard extends JFrame implements ActionListener {
         logOut.addActionListener(this);
         user.add(logOut);
 
-        menuBar.setBounds(0, 0, 280, 30);
+        menuBar.setBounds(0, 0, 240, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);

@@ -17,9 +17,9 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         menuBar = new JMenuBar();
         add(menuBar);
 
-        home = new JMenuItem("Home");
-        home.addActionListener(this);
-        menuBar.add(home);
+//        home = new JMenuItem("Home");
+//        home.addActionListener(this);
+//        menuBar.add(home);
 
         viewMenu = new JMenu("View");
         menuBar.add(viewMenu);
@@ -54,7 +54,7 @@ public class FacultyDashboard extends JFrame implements ActionListener {
         logOut.addActionListener(this);
         userMenu.add(logOut);
 
-        menuBar.setBounds(0, 0, 160, 30);
+        menuBar.setBounds(0, 0, 120, 30);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("com/miniproject/icons/jssateb.png"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(1900, 1000, Image.SCALE_DEFAULT);
